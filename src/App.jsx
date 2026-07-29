@@ -3,6 +3,7 @@ import "./App.css";
 import membershipIcon from "./assets/memberships-icon.png";
 import programsIcon from "./assets/programs-icon.png";
 import locationIcon from "./assets/location-icon.png";
+import gowingsLogo from "./assets/gowings-logo.png";
 
 const MEDIA_BASE = `${import.meta.env.BASE_URL}media/`;
 
@@ -77,7 +78,6 @@ const iconArtwork = {
       <path d="m12 7 1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3-2.2-2.1 3-.4L12 7Z" />
     </>
   ),
-
 };
 
 const iconImages = {
@@ -129,34 +129,126 @@ function ArrowIcon() {
 function App() {
   const [logoFailed, setLogoFailed] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
+
   const videoRef = useRef(null);
+  const bannerRef = useRef(null);
+
+  /*
+    Calculates only the angle of the diagonal banner.
+
+    Logo sizing is handled entirely by responsive CSS so the
+    JavaScript cannot unexpectedly shrink the logo.
+  */
+  useEffect(() => {
+    const bannerElement = bannerRef.current;
+
+    if (!bannerElement) {
+      return undefined;
+    }
+
+    let animationFrameId = null;
+
+    const updateBannerAngle = () => {
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+      }
+
+      animationFrameId = requestAnimationFrame(() => {
+        const {
+          width: bannerWidth,
+          height: bannerHeight,
+        } = bannerElement.getBoundingClientRect();
+
+        if (bannerWidth <= 0 || bannerHeight <= 0) {
+          return;
+        }
+
+        const angleInRadians = Math.atan2(
+          bannerHeight,
+          bannerWidth,
+        );
+
+        const angleInDegrees =
+          angleInRadians * (180 / Math.PI);
+
+        bannerElement.style.setProperty(
+          "--wings-banner-angle",
+          `${angleInDegrees}deg`,
+        );
+      });
+    };
+
+    updateBannerAngle();
+
+    const resizeObserver = new ResizeObserver(
+      updateBannerAngle,
+    );
+
+    resizeObserver.observe(bannerElement);
+
+    window.addEventListener(
+      "orientationchange",
+      updateBannerAngle,
+    );
+
+    window.visualViewport?.addEventListener(
+      "resize",
+      updateBannerAngle,
+    );
+
+    return () => {
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+      }
+
+      resizeObserver.disconnect();
+
+      window.removeEventListener(
+        "orientationchange",
+        updateBannerAngle,
+      );
+
+      window.visualViewport?.removeEventListener(
+        "resize",
+        updateBannerAngle,
+      );
+    };
+  }, []);
 
   useEffect(() => {
-    const videoEl = videoRef.current;
+    const videoElement = videoRef.current;
 
-    if (!videoEl || !window.matchMedia("(pointer: coarse)").matches) {
+    if (
+      !videoElement ||
+      !window.matchMedia("(pointer: coarse)").matches
+    ) {
       return undefined;
     }
 
     const isVideoFullscreen = () =>
-      document.fullscreenElement === videoEl ||
-      videoEl.webkitDisplayingFullscreen;
+      document.fullscreenElement === videoElement ||
+      videoElement.webkitDisplayingFullscreen;
 
     const enterFullscreen = () => {
-      if (videoEl.requestFullscreen) {
-        videoEl
+      if (videoElement.requestFullscreen) {
+        videoElement
           .requestFullscreen()
           .then(() => {
-            screen.orientation?.lock?.("landscape").catch(() => {});
+            screen.orientation
+              ?.lock?.("landscape")
+              .catch(() => {});
           })
           .catch(() => {});
-      } else if (videoEl.webkitEnterFullscreen) {
-        videoEl.webkitEnterFullscreen();
+      } else if (videoElement.webkitEnterFullscreen) {
+        videoElement.webkitEnterFullscreen();
       }
     };
 
     const exitFullscreen = () => {
-      if (document.fullscreenElement && document.exitFullscreen) {
+      if (
+        document.fullscreenElement &&
+        document.exitFullscreen
+      ) {
         document.exitFullscreen().catch(() => {});
       }
     };
@@ -166,14 +258,24 @@ function App() {
         "(orientation: landscape)",
       ).matches;
 
-      if (isLandscape && !videoEl.paused && !isVideoFullscreen()) {
+      if (
+        isLandscape &&
+        !videoElement.paused &&
+        !isVideoFullscreen()
+      ) {
         enterFullscreen();
-      } else if (!isLandscape && isVideoFullscreen()) {
+      } else if (
+        !isLandscape &&
+        isVideoFullscreen()
+      ) {
         exitFullscreen();
       }
     };
 
-    window.addEventListener("orientationchange", handleOrientationChange);
+    window.addEventListener(
+      "orientationchange",
+      handleOrientationChange,
+    );
 
     return () => {
       window.removeEventListener(
@@ -185,6 +287,20 @@ function App() {
 
   return (
     <main className="page-shell">
+      <div
+        className="wings-banner"
+        ref={bannerRef}
+        aria-hidden="true"
+      >
+        <div className="wings-banner__logo-positioner">
+          <img
+            className="wings-banner__logo"
+            src={gowingsLogo}
+            alt=""
+          />
+        </div>
+      </div>
+
       <section
         className="gsc-home-section"
         aria-labelledby="gsc-home-section-title"
@@ -214,7 +330,9 @@ function App() {
                   />
                 ) : (
                   <div className="story__logo-placeholder">
-                    <span>Taking it outside since 1954!</span>
+                    <span>
+                      Taking it outside since 1954!
+                    </span>
 
                     <small>
                       Add taking-it-outside-logo.png to
@@ -265,7 +383,10 @@ function App() {
                 aria-label="Greenwich Skating Club video"
                 onError={() => setVideoFailed(true)}
               >
-                <source src={VIDEO_SRC} type="video/mp4" />
+                <source
+                  src={VIDEO_SRC}
+                  type="video/mp4"
+                />
 
                 Your browser does not support embedded video.
               </video>
@@ -288,6 +409,7 @@ function App() {
                       height="14"
                       rx="2"
                     />
+
                     <path d="m10 9 5 3-5 3Z" />
                   </svg>
                 </div>

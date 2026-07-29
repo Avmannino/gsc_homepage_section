@@ -10,6 +10,7 @@ html {
 
   margin: 0;
   padding: 0;
+  overflow-x: clip;
 
   background: #e9ebee;
   scroll-behavior: smooth;
@@ -22,8 +23,10 @@ body {
 
   margin: 0;
   padding: 0;
+  overflow-x: clip;
 
   color: #102652;
+
   background:
     radial-gradient(
       circle at top center,
@@ -43,6 +46,7 @@ body {
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
