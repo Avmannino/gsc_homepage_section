@@ -3,6 +3,7 @@ import "./App.css";
 import membershipIcon from "./assets/memberships-icon.png";
 import programsIcon from "./assets/programs-icon.png";
 import locationIcon from "./assets/location-icon.png";
+import crossbarIcon from "./assets/crossbar.png";
 import gowingsLogo from "./assets/gowings-logo.png";
 
 const MEDIA_BASE = `${import.meta.env.BASE_URL}media/`;
@@ -24,7 +25,7 @@ const navigationLinks = [
   {
     title: "Club History",
     description:
-      "Explore our rich history and legacy of community.",
+      "A club shaped by our members.",
     href: `${SITE_BASE_URL}/club-history`,
     icon: "history",
     accent: "navy",
@@ -38,9 +39,9 @@ const navigationLinks = [
     accent: "red",
   },
   {
-    title: "Explore Programs",
+    title: "Programs",
     description:
-      "Discover programs for all ages and skill levels.",
+      "See what’s happening on the ice.",
     href: `${SITE_BASE_URL}/programs`,
     icon: "programs",
     accent: "navy",
@@ -60,6 +61,14 @@ const navigationLinks = [
     href: `${SITE_BASE_URL}/contact`,
     icon: "location",
     accent: "navy",
+  },
+  {
+    title: "Members | Crossbar Login",
+    description:
+      "Log in to the GSC Crossbar Portal.",
+    href: "https://www.greenwichskatingclub.org/login",
+    icon: "crossbar",
+    accent: "red",
   },
 ];
 
@@ -84,6 +93,7 @@ const iconImages = {
   membership: membershipIcon,
   programs: programsIcon,
   location: locationIcon,
+  crossbar: crossbarIcon,
 };
 
 const svgSizeModifiers = {
@@ -108,20 +118,19 @@ function SectionIcon({ type }) {
   );
 }
 
-function ArrowIcon() {
+function ChevronIcon() {
   return (
     <svg
       className="nav-card__arrow-svg"
-      viewBox="0 0 28 20"
+      viewBox="0 0 20 20"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.8"
+      strokeWidth="2.2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M2 10h23" />
-      <path d="m18 3 7 7-7 7" />
+      <path d="m7 3 6 7-6 7" />
     </svg>
   );
 }
@@ -171,9 +180,11 @@ function App() {
         const angleInDegrees =
           angleInRadians * (180 / Math.PI);
 
+        const ROTATION_OFFSET_DEGREES = -1;
+
         bannerElement.style.setProperty(
           "--wings-banner-angle",
-          `${angleInDegrees}deg`,
+          `${angleInDegrees + ROTATION_OFFSET_DEGREES}deg`,
         );
       });
     };
@@ -445,7 +456,11 @@ function App() {
               >
                 {iconImages[link.icon] ? (
                   <img
-                    className="nav-card__icon-image"
+                    className={`nav-card__icon-image${
+                      link.icon === "crossbar"
+                        ? " nav-card__icon-image--crossbar"
+                        : ""
+                    }`}
                     src={iconImages[link.icon]}
                     alt=""
                   />
@@ -473,7 +488,7 @@ function App() {
                 className="nav-card__arrow"
                 aria-hidden="true"
               >
-                <ArrowIcon />
+                <ChevronIcon />
               </span>
             </a>
           ))}
