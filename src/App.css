@@ -151,29 +151,6 @@
   gap: clamp(22px, 2.2vw, 44px);
 }
 
-@media (min-width: 1300px) {
-  .gsc-home-section {
-    transform: translateY(-75px);
-  }
-
-  .video-panel {
-    min-height: 0;
-
-    align-self: start;
-
-    width: 94%;
-    margin: 0 auto;
-
-    transform: translateY(50px);
-  }
-
-  .section-navigation {
-    margin-top: clamp(6px, calc(4vw - 30px), 46px);
-
-    transform: translateY(50px);
-  }
-}
-
 .story__accent-line {
   align-self: center;
 
@@ -208,9 +185,9 @@
 .story__logo {
   display: block;
 
-  width: min(100%, 760px);
+  width: min(100%, 684px);
   height: auto;
-  max-height: 145px;
+  max-height: 130px;
 
   object-fit: contain;
   object-position: left center;
@@ -278,6 +255,12 @@
   margin-top: clamp(24px, 2.3vw, 42px);
 }
 
+@media (min-width: 1051px) {
+  .story__copy p + p {
+    margin-top: clamp(16px, 1.6vw, 28px);
+  }
+}
+
 /* ---------------------------------------------------------
    VIDEO AREA
 --------------------------------------------------------- */
@@ -287,6 +270,8 @@
 
   width: 100%;
   min-height: 100%;
+
+  margin-top: -25px;
 
   overflow: hidden;
 
@@ -377,6 +362,52 @@
 }
 
 /* ---------------------------------------------------------
+   QUICK LINKS HEADING
+--------------------------------------------------------- */
+
+.quick-links-heading {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  margin-top: clamp(24px, 3vw, 48px);
+}
+
+.quick-links-heading__title {
+  margin: 0;
+  margin-left: calc(
+    (100% - 5 * clamp(12px, 1.2vw, 24px)) / 12 +
+      25px
+  );
+
+  color: var(--gsc-navy-dark);
+
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(1.2rem, 1.5vw, 1.7rem);
+  font-weight: 400;
+  line-height: 1;
+
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  transform: translateY(-10px);
+}
+
+.quick-links-heading__line {
+  display: block;
+
+  width: calc(
+    (500% + 5 * clamp(12px, 1.2vw, 24px)) / 6
+  );
+  height: 2px;
+  margin: 0 auto;
+
+  background: var(--gsc-navy);
+  opacity: 0.35;
+}
+
+/* ---------------------------------------------------------
    NAVIGATION CARDS
 --------------------------------------------------------- */
 
@@ -391,6 +422,35 @@
   margin-top: clamp(36px, 4vw, 76px);
 }
 
+@media (min-width: 1051px) {
+  .section-navigation {
+    margin-top: clamp(6px, calc(4vw - 55px), 21px);
+
+    transform: translateY(25px);
+  }
+
+  .quick-links-heading {
+    transform: translateY(25px);
+  }
+}
+
+@media (min-width: 1300px) {
+  .gsc-home-section {
+    transform: translateY(-75px);
+  }
+
+  .video-panel {
+    min-height: 0;
+
+    align-self: start;
+
+    width: 94%;
+    margin: 0 auto;
+
+    transform: translateY(50px);
+  }
+}
+
 .nav-card {
   position: relative;
 
@@ -402,7 +462,7 @@
   align-items: center;
   justify-content: center;
 
-  gap: clamp(10px, 1vw, 18px);
+  gap: clamp(6px, 0.6vw, 10px);
 
   padding:
     clamp(15px, 1.4vw, 26px)
@@ -461,18 +521,13 @@
   color: var(--gsc-red);
 }
 
-.nav-card__icon--history {
+.nav-card__icon--contact {
   color: #e51837;
 }
 
 .nav-card__svg {
   width: 55%;
   height: 55%;
-}
-
-.nav-card__svg--history {
-  width: 64%;
-  height: 64%;
 }
 
 .nav-card__svg--board {
@@ -536,7 +591,7 @@
   color: var(--gsc-navy);
 
   font-family: "Montserrat", sans-serif;
-  font-size: clamp(0.68rem, 0.71vw, 0.94rem);
+  font-size: clamp(0.6rem, 0.55vw, 0.78rem);
   font-weight: 500;
   line-height: 1.48;
 
@@ -620,7 +675,7 @@
 
     padding: 14px;
 
-    gap: 10px;
+    gap: 6px;
   }
 
   .nav-card__arrow {
@@ -640,6 +695,10 @@
       46vw,
       470px
     );
+  }
+
+  .quick-links-heading {
+    display: none;
   }
 
   .gsc-home-section__top {
@@ -674,7 +733,7 @@
 
     padding: 18px;
 
-    gap: 16px;
+    gap: 10px;
   }
 
   .nav-card__icon {
@@ -687,7 +746,7 @@
   }
 
   .nav-card__description {
-    font-size: 0.8rem;
+    font-size: 0.72rem;
   }
 }
 
@@ -741,7 +800,7 @@
   }
 
   .story__logo {
-    max-height: 86px;
+    max-height: 77px;
   }
 
   .story__logo-placeholder {
@@ -789,7 +848,7 @@
     align-items: center;
     justify-content: center;
 
-    gap: 10px;
+    gap: 6px;
 
     padding: 16px 10px 14px;
 
@@ -874,7 +933,7 @@
   .nav-card {
     min-height: 116px;
 
-    gap: 9px;
+    gap: 6px;
 
     padding: 13px 6px 12px;
 

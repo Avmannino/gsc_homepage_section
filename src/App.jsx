@@ -23,11 +23,11 @@ const SITE_BASE_URL =
 
 const navigationLinks = [
   {
-    title: "Club History",
+    title: "Members | Crossbar Login",
     description:
-      "A club shaped by our members.",
-    href: `${SITE_BASE_URL}/club-history`,
-    icon: "history",
+      "Log in to the GSC Crossbar Portal.",
+    href: "https://www.greenwichskatingclub.org/login",
+    icon: "crossbar",
     accent: "navy",
   },
   {
@@ -55,29 +55,34 @@ const navigationLinks = [
     accent: "red",
   },
   {
-    title: "Contact & Directions",
+    title: "Contact Us",
     description:
       "Get in touch with us.",
     href: `${SITE_BASE_URL}/contact`,
-    icon: "location",
+    icon: "envelope",
     accent: "navy",
   },
   {
-    title: "Members | Crossbar Login",
+    title: "Directions",
     description:
-      "Log in to the GSC Crossbar Portal.",
-    href: "https://www.greenwichskatingclub.org/login",
-    icon: "crossbar",
+      "Get directions to the club.",
+    href: `${SITE_BASE_URL}/directions`,
+    icon: "location",
     accent: "red",
   },
 ];
 
 const iconArtwork = {
-  history: (
+  envelope: (
     <>
-      <path d="M5 8a8 8 0 1 1-1 6" />
-      <path d="M5 4v4h4" />
-      <path d="M12 7v5l3 2" />
+      <rect
+        x="3"
+        y="5"
+        width="18"
+        height="14"
+        rx="2"
+      />
+      <path d="m3 7 9 6 9-6" />
     </>
   ),
 
@@ -97,7 +102,6 @@ const iconImages = {
 };
 
 const svgSizeModifiers = {
-  history: "nav-card__svg--history",
   board: "nav-card__svg--board",
 };
 
@@ -435,6 +439,17 @@ function App() {
           </div>
         </div>
 
+        <div className="quick-links-heading">
+          <h2 className="quick-links-heading__title">
+            Quick Links
+          </h2>
+
+          <span
+            className="quick-links-heading__line"
+            aria-hidden="true"
+          />
+        </div>
+
         <nav
           className="section-navigation"
           aria-label="Greenwich Skating Club pages"
@@ -449,8 +464,8 @@ function App() {
             >
               <span
                 className={`nav-card__icon nav-card__icon--${link.accent}${
-                  link.icon === "history"
-                    ? " nav-card__icon--history"
+                  link.icon === "envelope"
+                    ? " nav-card__icon--contact"
                     : ""
                 }`}
               >
