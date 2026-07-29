@@ -415,11 +415,14 @@
   display: grid;
 
   grid-template-columns:
-    repeat(6, minmax(0, 1fr));
+    repeat(3, minmax(0, 1fr));
 
   gap: clamp(12px, 1.2vw, 24px);
 
+  max-width: 1330px;
   margin-top: clamp(36px, 4vw, 76px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (min-width: 1051px) {
@@ -455,22 +458,22 @@
   position: relative;
 
   min-width: 0;
-  min-height: 156px;
+  min-height: 152px;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
-  gap: clamp(6px, 0.6vw, 10px);
+  gap: clamp(14px, 1.4vw, 22px);
 
   padding:
-    clamp(15px, 1.4vw, 26px)
-    clamp(16px, 1.4vw, 27px);
+    clamp(18px, 1.8vw, 26px)
+    clamp(20px, 2vw, 32px);
 
   color: var(--gsc-navy);
 
-  text-align: center;
+  text-align: left;
   text-decoration: none;
 
   background: var(--gsc-card-background);
@@ -550,7 +553,8 @@
 }
 
 .nav-card__divider {
-  display: none;
+  flex: 0 0 auto;
+  display: block;
 
   width: 1px;
   height: clamp(48px, 4vw, 76px);
@@ -559,22 +563,22 @@
 }
 
 .nav-card__content {
-  width: 100%;
+  flex: 1 1 auto;
   min-width: 0;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
-  text-align: center;
+  text-align: left;
 }
 
 .nav-card__title {
   color: var(--gsc-navy-dark);
 
   font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(0.92rem, 1.05vw, 1.38rem);
+  font-size: clamp(1.05rem, 1.25vw, 1.55rem);
   font-weight: 400;
   line-height: 1.25;
 
@@ -584,26 +588,22 @@
 
 .nav-card__description {
   width: 100%;
-  margin-top: 8px;
-
-  overflow: hidden;
+  margin-top: 6px;
 
   color: var(--gsc-navy);
 
   font-family: "Montserrat", sans-serif;
-  font-size: clamp(0.6rem, 0.55vw, 0.78rem);
+  font-size: clamp(0.82rem, 0.85vw, 0.98rem);
   font-weight: 500;
   line-height: 1.48;
 
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  white-space: normal;
 }
 
 .nav-card__arrow {
-  position: absolute;
+  flex: 0 0 auto;
 
-  top: clamp(13px, 1.2vw, 21px);
-  right: clamp(12px, 1.15vw, 20px);
+  margin-left: auto;
 
   width: clamp(20px, 1.7vw, 32px);
 
@@ -671,16 +671,11 @@
   }
 
   .nav-card {
-    min-height: 144px;
+    min-height: 148px;
 
-    padding: 14px;
+    padding: 16px 20px;
 
-    gap: 6px;
-  }
-
-  .nav-card__arrow {
-    top: 13px;
-    right: 12px;
+    gap: 14px;
   }
 }
 
@@ -729,7 +724,7 @@
   }
 
   .nav-card {
-    min-height: 132px;
+    min-height: 152px;
 
     padding: 18px;
 
@@ -828,10 +823,6 @@
     border-radius: 14px;
   }
 
-  /*
-    Two columns: rows of 2, with the leftover fifth card
-    centered on its own row.
-  */
   .section-navigation {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
@@ -843,14 +834,12 @@
   .nav-card {
     min-height: 128px;
 
-    display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
 
-    gap: 6px;
+    gap: 10px;
 
-    padding: 16px 10px 14px;
+    padding: 16px 12px;
 
     text-align: center;
 
@@ -858,22 +847,21 @@
   }
 
   .nav-card__icon {
-    flex: 0 0 auto;
-
-    width: 58px;
-    height: 58px;
+    width: 66px;
+    height: 66px;
   }
 
-  .nav-card__divider {
+  /*
+    The two-column mobile card is too narrow to also show the
+    description, so it's dropped here; icon and title stack
+    vertically with a small arrow underneath.
+  */
+  .nav-card__divider,
+  .nav-card__description {
     display: none;
   }
 
   .nav-card__content {
-    width: 100%;
-    min-width: 0;
-
-    padding: 0;
-
     align-items: center;
 
     text-align: center;
@@ -882,7 +870,7 @@
   .nav-card__title {
     width: 100%;
 
-    font-size: clamp(1rem, 4vw, 1.2rem);
+    font-size: clamp(1.05rem, 4vw, 1.22rem);
     line-height: 1.2;
 
     letter-spacing: 0.035em;
@@ -890,16 +878,10 @@
     overflow-wrap: anywhere;
   }
 
-  /*
-    Hide the longer supporting copy on mobile so the cards
-    stay compact and the overall section is much shorter.
-  */
-  .nav-card__description {
-    display: none;
-  }
-
   .nav-card__arrow {
-    display: none;
+    margin-left: 0;
+
+    width: 17px;
   }
 }
 
@@ -933,21 +915,25 @@
   .nav-card {
     min-height: 116px;
 
-    gap: 6px;
+    gap: 8px;
 
-    padding: 13px 6px 12px;
+    padding: 14px 10px;
 
     border-radius: 12px;
   }
 
   .nav-card__icon {
-    width: 50px;
-    height: 50px;
+    width: 58px;
+    height: 58px;
   }
 
   .nav-card__title {
-    font-size: clamp(0.9rem, 3.8vw, 1.05rem);
+    font-size: clamp(0.96rem, 3.8vw, 1.1rem);
     line-height: 1.15;
+  }
+
+  .nav-card__arrow {
+    width: 15px;
   }
 }
 
@@ -961,18 +947,20 @@
   }
 
   .nav-card {
-    min-height: 106px;
+    min-height: 104px;
 
-    padding: 11px 4px 10px;
+    gap: 6px;
+
+    padding: 12px 8px;
   }
 
   .nav-card__icon {
-    width: 46px;
-    height: 46px;
+    width: 50px;
+    height: 50px;
   }
 
   .nav-card__title {
-    font-size: 0.86rem;
+    font-size: 0.9rem;
   }
 }
 
