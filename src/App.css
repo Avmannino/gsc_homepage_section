@@ -153,8 +153,21 @@
 }
 
 @media (min-width: 1051px) {
-  .story {
+  .gsc-home-section {
     transform: translateY(-75px);
+  }
+
+  .video-panel {
+    min-height: 0;
+
+    align-self: start;
+
+    width: 94%;
+    margin: 0 auto;
+  }
+
+  .section-navigation {
+    margin-top: clamp(6px, calc(4vw - 30px), 46px);
   }
 }
 
