@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import membershipIcon from "./assets/memberships-icon.png";
 import programsIcon from "./assets/programs-icon.png";
@@ -129,6 +129,59 @@ function ArrowIcon() {
 function App() {
   const [logoFailed, setLogoFailed] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const videoEl = videoRef.current;
+
+    if (!videoEl || !window.matchMedia("(pointer: coarse)").matches) {
+      return undefined;
+    }
+
+    const isVideoFullscreen = () =>
+      document.fullscreenElement === videoEl ||
+      videoEl.webkitDisplayingFullscreen;
+
+    const enterFullscreen = () => {
+      if (videoEl.requestFullscreen) {
+        videoEl
+          .requestFullscreen()
+          .then(() => {
+            screen.orientation?.lock?.("landscape").catch(() => {});
+          })
+          .catch(() => {});
+      } else if (videoEl.webkitEnterFullscreen) {
+        videoEl.webkitEnterFullscreen();
+      }
+    };
+
+    const exitFullscreen = () => {
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+    };
+
+    const handleOrientationChange = () => {
+      const isLandscape = window.matchMedia(
+        "(orientation: landscape)",
+      ).matches;
+
+      if (isLandscape && !videoEl.paused && !isVideoFullscreen()) {
+        enterFullscreen();
+      } else if (!isLandscape && isVideoFullscreen()) {
+        exitFullscreen();
+      }
+    };
+
+    window.addEventListener("orientationchange", handleOrientationChange);
+
+    return () => {
+      window.removeEventListener(
+        "orientationchange",
+        handleOrientationChange,
+      );
+    };
+  }, []);
 
   return (
     <main className="page-shell">
@@ -201,6 +254,7 @@ function App() {
           <div className="video-panel">
             {!videoFailed ? (
               <video
+                ref={videoRef}
                 className="video-panel__video"
                 autoPlay
                 muted
