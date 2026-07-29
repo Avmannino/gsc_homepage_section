@@ -1,0 +1,78 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-width: 320px;
+
+  margin: 0;
+  padding: 0;
+
+  background: #e9ebee;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  color: #102652;
+  background:
+    radial-gradient(
+      circle at top center,
+      rgba(238, 240, 242, 0.92) 0%,
+      rgba(233, 235, 238, 0.98) 55%,
+      #e6e9ec 100%
+    );
+
+  font-family:
+    "Montserrat",
+    "Avenir Next",
+    Avenir,
+    "Segoe UI",
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
