@@ -23,7 +23,7 @@ const SITE_BASE_URL =
 
 const navigationLinks = [
   {
-    title: "Members | Crossbar Login",
+    title: "Crossbar Login",
     description:
       "Log in to the GSC Crossbar Portal.",
     href: "https://www.greenwichskatingclub.org/login",
@@ -33,7 +33,7 @@ const navigationLinks = [
   {
     title: "Membership",
     description:
-      "Learn about memberships and how to join GSC.",
+      "Learn about memberships.",
     href: `${SITE_BASE_URL}/membership`,
     icon: "membership",
     accent: "red",
@@ -359,7 +359,7 @@ function App() {
 
         <div className="quick-links-heading">
           <h2 className="quick-links-heading__title">
-            Quick Links
+            Around The Rink
           </h2>
 
           <span
