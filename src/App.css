@@ -454,6 +454,8 @@
 
 @media (min-width: 1051px) {
   .section-navigation {
+    gap: clamp(24px, 3vw, 48px);
+
     margin-top: clamp(6px, calc(4vw - 55px), 21px);
 
     transform: translateY(25px);
