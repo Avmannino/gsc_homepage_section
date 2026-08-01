@@ -1,3 +1,23 @@
+html,
+body,
+#root {
+  width: 100%;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   --gsc-navy: #102652;
   --gsc-navy-dark: #0a1d43;
@@ -20,10 +40,15 @@
   position: relative;
 
   width: 100%;
+  height: auto;
+  min-height: 0;
 
   overflow-x: clip;
 
-  padding: clamp(20px, 3.4vw, 72px);
+  padding:
+    clamp(20px, 3.4vw, 72px)
+    clamp(20px, 3.4vw, 72px)
+    clamp(18px, 2vw, 36px);
 }
 
 /* ---------------------------------------------------------
@@ -261,10 +286,6 @@
 }
 
 @media (min-width: 1051px) {
-  .story {
-    transform: translateY(30px);
-  }
-
   .story__copy p + p {
     margin-top: clamp(16px, 1.6vw, 28px);
   }
@@ -272,7 +293,7 @@
 
 @media (min-width: 1051px) and (max-width: 1299px) {
   .story {
-    transform: translateY(-45px);
+    margin-top: -45px;
   }
 }
 
@@ -478,29 +499,31 @@
   .section-navigation {
     gap: clamp(24px, 3vw, 48px);
 
-    margin-top: clamp(36px, calc(4vw - 25px), 51px);
-
-    transform: translateY(25px);
+    margin-top: clamp(28px, 2.5vw, 42px);
   }
 
   .quick-links-heading {
-    transform: translateY(25px);
+    margin-top: clamp(38px, 3.5vw, 58px);
   }
 
   .video-panel {
-    transform: translateY(-30px);
+    margin-top: -25px;
   }
 }
 
 @media (min-width: 1051px) and (max-width: 1299px) {
   .video-panel {
-    transform: translateY(-5px);
+    margin-top: -30px;
   }
 }
 
 @media (min-width: 1300px) {
   .gsc-home-section {
-    transform: translateY(-75px);
+    margin-top: calc(
+      var(--wings-banner-height) +
+      clamp(16px, 2.4vw, 34px) -
+      55px
+    );
   }
 
   .video-panel {
@@ -510,8 +533,6 @@
 
     width: 94%;
     margin: 0 auto;
-
-    transform: translateY(20px);
   }
 }
 
@@ -568,11 +589,6 @@
     width: min(100%, 639px);
     max-height: 122px;
   }
-
-  .quick-links-heading,
-  .section-navigation {
-    transform: translateY(60px);
-  }
 }
 
 @media (min-width: 2200px) {
@@ -581,8 +597,6 @@
       repeat(12, minmax(0, 1fr));
 
     max-width: 2010px;
-
-    transform: translateY(65px);
   }
 
   .nav-card:nth-child(5),
@@ -592,12 +606,11 @@
 
   .quick-links-heading {
     max-width: 2010px;
-
-    transform: translateY(65px);
   }
 
   .story {
-    transform: translateY(70px) translateX(45px);
+    position: relative;
+    left: 45px;
   }
 
   .story__logo-container {
@@ -605,7 +618,7 @@
   }
 
   .story__copy {
-    transform: translateY(25px);
+    margin-top: 25px;
   }
 
   .nav-card:nth-child(4) .nav-card__title {
@@ -749,6 +762,15 @@
   height: auto;
 }
 
+.gsc-home-section {
+  padding-bottom: 0;
+}
+
+.section-navigation {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 /* ---------------------------------------------------------
    ACCESSIBILITY
 --------------------------------------------------------- */
@@ -878,7 +900,7 @@
 
 @media (min-width: 641px) and (max-width: 950px) {
   .quick-links-heading {
-    transform: translateY(90px);
+    margin-top: clamp(54px, 7vw, 82px);
   }
 
   .quick-links-heading__title {
@@ -886,11 +908,11 @@
   }
 
   .section-navigation {
-    transform: translateY(90px);
+    margin-top: clamp(24px, 3vw, 36px);
   }
 
   .video-panel {
-    transform: translateY(40px);
+    margin-top: 15px;
   }
 }
 
@@ -908,7 +930,7 @@
   }
 
   .page-shell {
-    padding: 12px;
+    padding: 12px 12px 18px;
   }
 
   .wings-banner__logo-positioner {
