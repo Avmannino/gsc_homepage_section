@@ -143,7 +143,6 @@ function App() {
   const [logoFailed, setLogoFailed] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
 
-  const videoRef = useRef(null);
   const bannerRef = useRef(null);
 
   /*
@@ -206,11 +205,6 @@ function App() {
       updateBannerAngle,
     );
 
-    window.visualViewport?.addEventListener(
-      "resize",
-      updateBannerAngle,
-    );
-
     return () => {
       if (animationFrameId !== null) {
         cancelAnimationFrame(animationFrameId);
@@ -221,81 +215,6 @@ function App() {
       window.removeEventListener(
         "orientationchange",
         updateBannerAngle,
-      );
-
-      window.visualViewport?.removeEventListener(
-        "resize",
-        updateBannerAngle,
-      );
-    };
-  }, []);
-
-  useEffect(() => {
-    const videoElement = videoRef.current;
-
-    if (
-      !videoElement ||
-      !window.matchMedia("(pointer: coarse)").matches
-    ) {
-      return undefined;
-    }
-
-    const isVideoFullscreen = () =>
-      document.fullscreenElement === videoElement ||
-      videoElement.webkitDisplayingFullscreen;
-
-    const enterFullscreen = () => {
-      if (videoElement.requestFullscreen) {
-        videoElement
-          .requestFullscreen()
-          .then(() => {
-            screen.orientation
-              ?.lock?.("landscape")
-              .catch(() => {});
-          })
-          .catch(() => {});
-      } else if (videoElement.webkitEnterFullscreen) {
-        videoElement.webkitEnterFullscreen();
-      }
-    };
-
-    const exitFullscreen = () => {
-      if (
-        document.fullscreenElement &&
-        document.exitFullscreen
-      ) {
-        document.exitFullscreen().catch(() => {});
-      }
-    };
-
-    const handleOrientationChange = () => {
-      const isLandscape = window.matchMedia(
-        "(orientation: landscape)",
-      ).matches;
-
-      if (
-        isLandscape &&
-        !videoElement.paused &&
-        !isVideoFullscreen()
-      ) {
-        enterFullscreen();
-      } else if (
-        !isLandscape &&
-        isVideoFullscreen()
-      ) {
-        exitFullscreen();
-      }
-    };
-
-    window.addEventListener(
-      "orientationchange",
-      handleOrientationChange,
-    );
-
-    return () => {
-      window.removeEventListener(
-        "orientationchange",
-        handleOrientationChange,
       );
     };
   }, []);
@@ -387,7 +306,6 @@ function App() {
           <div className="video-panel">
             {!videoFailed ? (
               <video
-                ref={videoRef}
                 className="video-panel__video"
                 autoPlay
                 muted
