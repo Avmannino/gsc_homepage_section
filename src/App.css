@@ -933,6 +933,10 @@ body {
     );
   }
 
+  .wings-banner::before {
+    background: #103e9c;
+  }
+
   .page-shell {
     padding: 12px 12px 18px;
   }
