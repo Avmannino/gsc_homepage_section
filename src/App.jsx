@@ -357,75 +357,217 @@ function App() {
           </div>
         </div>
 
-        <div className="quick-links-heading">
-          <h2 className="quick-links-heading__title">
-            Around The Rink
-          </h2>
-
-          <span
-            className="quick-links-heading__line"
+        <div className="rink-shape">
+          <svg
+            className="rink-shape__markings"
+            viewBox="0 0 200 90"
+            preserveAspectRatio="xMidYMid slice"
             aria-hidden="true"
-          />
+          >
+            <defs>
+              <mask
+                id="rink-heading-notch"
+                maskContentUnits="objectBoundingBox"
+              >
+                <rect
+                  x="0"
+                  y="0"
+                  width="1"
+                  height="1"
+                  fill="white"
+                />
+                <rect
+                  x="0.42"
+                  y="0"
+                  width="0.16"
+                  height="0.035"
+                  fill="black"
+                />
+              </mask>
+            </defs>
+
+            <path
+              d="M 12 40 A 5 5 0 0 1 12 50 Z"
+              className="rink-shape__crease"
+              vectorEffect="non-scaling-stroke"
+            />
+            <path
+              d="M 188 40 A 5 5 0 0 0 188 50 Z"
+              className="rink-shape__crease"
+              vectorEffect="non-scaling-stroke"
+            />
+            <line
+              x1="12"
+              y1="0"
+              x2="12"
+              y2="90"
+              className="rink-shape__goal-line"
+              vectorEffect="non-scaling-stroke"
+            />
+            <line
+              x1="188"
+              y1="0"
+              x2="188"
+              y2="90"
+              className="rink-shape__goal-line"
+              vectorEffect="non-scaling-stroke"
+            />
+            <line
+              x1="70"
+              y1="0"
+              x2="70"
+              y2="90"
+              className="rink-shape__blue-line"
+              vectorEffect="non-scaling-stroke"
+            />
+            <line
+              x1="130"
+              y1="0"
+              x2="130"
+              y2="90"
+              className="rink-shape__blue-line"
+              vectorEffect="non-scaling-stroke"
+            />
+            <line
+              x1="100"
+              y1="0"
+              x2="100"
+              y2="90"
+              className="rink-shape__center-line"
+              vectorEffect="non-scaling-stroke"
+            />
+            <circle
+              cx="100"
+              cy="45"
+              r="14"
+              className="rink-shape__center-circle"
+              vectorEffect="non-scaling-stroke"
+            />
+            <circle
+              cx="100"
+              cy="45"
+              r="1.5"
+              className="rink-shape__dot"
+            />
+            <circle
+              cx="48"
+              cy="26"
+              r="10"
+              className="rink-shape__faceoff-circle"
+              vectorEffect="non-scaling-stroke"
+            />
+            <circle
+              cx="48"
+              cy="26"
+              r="1.5"
+              className="rink-shape__dot"
+            />
+            <circle
+              cx="48"
+              cy="64"
+              r="10"
+              className="rink-shape__faceoff-circle"
+              vectorEffect="non-scaling-stroke"
+            />
+            <circle
+              cx="48"
+              cy="64"
+              r="1.5"
+              className="rink-shape__dot"
+            />
+            <circle
+              cx="152"
+              cy="26"
+              r="10"
+              className="rink-shape__faceoff-circle"
+              vectorEffect="non-scaling-stroke"
+            />
+            <circle
+              cx="152"
+              cy="26"
+              r="1.5"
+              className="rink-shape__dot"
+            />
+            <circle
+              cx="152"
+              cy="64"
+              r="10"
+              className="rink-shape__faceoff-circle"
+              vectorEffect="non-scaling-stroke"
+            />
+            <circle
+              cx="152"
+              cy="64"
+              r="1.5"
+              className="rink-shape__dot"
+            />
+          </svg>
+
+          <div className="quick-links-heading">
+            <h2 className="quick-links-heading__title">
+              Around The Rink
+            </h2>
+          </div>
+
+          <nav
+            className="section-navigation"
+            aria-label="Greenwich Skating Club pages"
+          >
+            {navigationLinks.map((link) => (
+              <a
+                className="nav-card"
+                href={link.href}
+                target="_top"
+                key={link.title}
+                aria-label={`${link.title}: ${link.description}`}
+              >
+                <span
+                  className={`nav-card__icon nav-card__icon--${link.accent}${
+                    link.icon === "envelope"
+                      ? " nav-card__icon--contact"
+                      : ""
+                  }`}
+                >
+                  {iconImages[link.icon] ? (
+                    <img
+                      className={`nav-card__icon-image${
+                        link.icon === "crossbar"
+                          ? " nav-card__icon-image--crossbar"
+                          : ""
+                      }`}
+                      src={iconImages[link.icon]}
+                      alt=""
+                    />
+                  ) : (
+                    <SectionIcon type={link.icon} />
+                  )}
+                </span>
+
+                <span
+                  className="nav-card__divider"
+                  aria-hidden="true"
+                />
+
+                <span className="nav-card__content">
+                  <span className="nav-card__title">
+                    {link.title}
+                  </span>
+
+                  <span className="nav-card__description">
+                    {link.description}
+                  </span>
+                </span>
+
+                <span
+                  className="nav-card__arrow"
+                  aria-hidden="true"
+                >
+                  <ChevronIcon />
+                </span>
+              </a>
+            ))}
+          </nav>
         </div>
-
-        <nav
-          className="section-navigation"
-          aria-label="Greenwich Skating Club pages"
-        >
-          {navigationLinks.map((link) => (
-            <a
-              className="nav-card"
-              href={link.href}
-              target="_top"
-              key={link.title}
-              aria-label={`${link.title}: ${link.description}`}
-            >
-              <span
-                className={`nav-card__icon nav-card__icon--${link.accent}${
-                  link.icon === "envelope"
-                    ? " nav-card__icon--contact"
-                    : ""
-                }`}
-              >
-                {iconImages[link.icon] ? (
-                  <img
-                    className={`nav-card__icon-image${
-                      link.icon === "crossbar"
-                        ? " nav-card__icon-image--crossbar"
-                        : ""
-                    }`}
-                    src={iconImages[link.icon]}
-                    alt=""
-                  />
-                ) : (
-                  <SectionIcon type={link.icon} />
-                )}
-              </span>
-
-              <span
-                className="nav-card__divider"
-                aria-hidden="true"
-              />
-
-              <span className="nav-card__content">
-                <span className="nav-card__title">
-                  {link.title}
-                </span>
-
-                <span className="nav-card__description">
-                  {link.description}
-                </span>
-              </span>
-
-              <span
-                className="nav-card__arrow"
-                aria-hidden="true"
-              >
-                <ChevronIcon />
-              </span>
-            </a>
-          ))}
-        </nav>
       </section>
     </main>
   );
