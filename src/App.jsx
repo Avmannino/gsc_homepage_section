@@ -10,6 +10,7 @@ const MEDIA_BASE = `${import.meta.env.BASE_URL}media/`;
 
 const LOGO_SRC = `${MEDIA_BASE}taking-it-outside-logo.png`;
 const VIDEO_SRC = `${MEDIA_BASE}gsc-homepage-video.mp4`;
+const CENTER_ICE_LOGO_SRC = `${import.meta.env.BASE_URL}gsc-logo.png`;
 
 /*
   These currently use the Wix Studio test-site URL.
@@ -448,6 +449,15 @@ function App() {
               cy="45"
               r="1.5"
               className="rink-shape__dot"
+            />
+            <image
+              href={CENTER_ICE_LOGO_SRC}
+              x="87"
+              y="32"
+              width="26"
+              height="26"
+              preserveAspectRatio="xMidYMid meet"
+              className="rink-shape__center-logo"
             />
             <circle
               cx="48"
