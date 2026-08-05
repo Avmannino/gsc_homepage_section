@@ -385,6 +385,52 @@ function App() {
                   fill="black"
                 />
               </mask>
+
+              {/*
+                The title takes up a much bigger share of the
+                (much narrower) rink shape at tablet and mobile
+                widths, so the notch needs to be proportionally
+                wider there or the border pokes through the text.
+              */}
+              <mask
+                id="rink-heading-notch-tablet"
+                maskContentUnits="objectBoundingBox"
+              >
+                <rect
+                  x="0"
+                  y="0"
+                  width="1"
+                  height="1"
+                  fill="white"
+                />
+                <rect
+                  x="0.325"
+                  y="0"
+                  width="0.35"
+                  height="0.035"
+                  fill="black"
+                />
+              </mask>
+
+              <mask
+                id="rink-heading-notch-mobile"
+                maskContentUnits="objectBoundingBox"
+              >
+                <rect
+                  x="0"
+                  y="0"
+                  width="1"
+                  height="1"
+                  fill="white"
+                />
+                <rect
+                  x="0.13"
+                  y="0"
+                  width="0.74"
+                  height="0.035"
+                  fill="black"
+                />
+              </mask>
             </defs>
 
             <path

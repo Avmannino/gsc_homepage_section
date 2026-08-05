@@ -572,6 +572,8 @@ body {
   .rink-shape {
     padding-top: clamp(44px, 5vw, 68px);
     padding-bottom: clamp(28px, 3vw, 48px);
+
+    margin-top: calc(clamp(28px, 2.5vw, 42px) + 25px);
   }
 
   .video-panel {
@@ -581,7 +583,7 @@ body {
 
 @media (min-width: 1051px) and (max-width: 1299px) {
   .video-panel {
-    margin-top: -30px;
+    margin-top: -55px;
   }
 }
 
@@ -601,6 +603,7 @@ body {
 
     width: 94%;
     margin: 0 auto;
+    margin-top: -25px;
   }
 }
 
@@ -970,6 +973,11 @@ body {
     padding-top: clamp(34px, 4.5vw, 48px);
   }
 
+  .rink-shape::before {
+    mask: url(#rink-heading-notch-tablet);
+    -webkit-mask: url(#rink-heading-notch-tablet);
+  }
+
   .video-panel {
     margin-top: 15px;
   }
@@ -1066,6 +1074,11 @@ body {
     margin-top: 50px;
 
     border-radius: 32px;
+  }
+
+  .rink-shape::before {
+    mask: url(#rink-heading-notch-mobile);
+    -webkit-mask: url(#rink-heading-notch-mobile);
   }
 
   .quick-links-heading__title {
