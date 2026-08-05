@@ -378,6 +378,7 @@ function App() {
                   fill="white"
                 />
                 <rect
+                  className="rink-shape__notch"
                   x="0.42"
                   y="0"
                   width="0.16"

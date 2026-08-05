@@ -1085,6 +1085,11 @@ body {
     font-size: 1.4rem;
   }
 
+  .rink-shape__notch {
+    x: 0.25;
+    width: 0.5;
+  }
+
   .section-navigation {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
@@ -1192,6 +1197,11 @@ body {
     border-radius: 26px;
   }
 
+  .rink-shape__notch {
+    x: 0.2;
+    width: 0.6;
+  }
+
   .nav-card {
     min-height: 116px;
 
@@ -1230,6 +1240,11 @@ body {
     padding: 30px 10px 10px;
 
     border-radius: 22px;
+  }
+
+  .rink-shape__notch {
+    x: 0.16;
+    width: 0.68;
   }
 
   .nav-card {
