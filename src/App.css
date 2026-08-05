@@ -1155,6 +1155,10 @@ body {
     overflow-wrap: anywhere;
   }
 
+  .nav-card:nth-child(4) .nav-card__title {
+    font-size: clamp(1rem, 3.8vw, 1.16rem);
+  }
+
   .nav-card__arrow {
     grid-area: arrow;
 
