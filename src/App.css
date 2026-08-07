@@ -1223,7 +1223,7 @@ body {
   }
 
   .quick-links-heading__title {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
   }
 
   .section-navigation {
@@ -1242,13 +1242,17 @@ body {
     border-radius: 14px;
   }
 
+  .nav-card:nth-child(3) {
+    padding: 16px 30px 16px 16px;
+  }
+
   .nav-card__icon {
     width: 92px;
     height: 92px;
   }
 
   .nav-card__title {
-    font-size: clamp(0.88rem, 3.4vw, 1.02rem);
+    font-size: clamp(1.1rem, 4.2vw, 1.28rem);
 
     overflow-wrap: anywhere;
     word-break: break-word;
@@ -1354,7 +1358,7 @@ body {
   }
 
   .nav-card__title {
-    font-size: clamp(0.8rem, 3.2vw, 0.94rem);
+    font-size: clamp(1rem, 3.9vw, 1.16rem);
     line-height: 1.15;
   }
 
@@ -1392,7 +1396,7 @@ body {
   }
 
   .nav-card__title {
-    font-size: 0.9rem;
+    font-size: 1.02rem;
   }
 }
 
