@@ -29,10 +29,10 @@ body {
 
   background:
     radial-gradient(
-      circle at bottom right,
-      rgba(196, 197, 197, 0.92) 0%,
-      rgba(233, 235, 238, 0.98) 55%,
-      #cfcfcf 100%
+      circle at top left,
+      #2c53b8 0%,
+      #1f419b 55%,
+      #163775 100%
     );
 
   font-family:

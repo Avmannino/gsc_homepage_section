@@ -85,7 +85,7 @@ body {
 
   inset: 0;
 
-  background: var(--gsc-blue-accent);
+  background: #e51837;
 
   clip-path: polygon(
     0 0,
@@ -186,12 +186,26 @@ body {
 }
 
 .story__accent-line {
-  align-self: center;
+  position: relative;
+  bottom: -28px;
+
+  align-self: end;
 
   width: 3px;
-  height: 445px;
+  height: 300px;
 
-  border-radius: 999px;
+  background: var(--gsc-red);
+}
+
+.story__accent-line::after {
+  content: "";
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: clamp(220px, 28vw, 440px);
+  height: 3px;
 
   background: var(--gsc-red);
 }
@@ -277,7 +291,7 @@ body {
 .story__copy p {
   margin: 0;
 
-  color: var(--gsc-navy);
+  color: #ffffff;
 
   font-family: "Montserrat", sans-serif;
   font-size: clamp(0.96rem, 0.95vw, 1.22rem);
@@ -433,12 +447,20 @@ body {
   position: relative;
 
   max-width: 1330px;
-  margin: clamp(28px, 2.5vw, 42px) auto 0;
+  margin: clamp(16px, 1.8vw, 24px) auto 0;
 
   padding:
     clamp(32px, 4vw, 52px)
     clamp(16px, 2vw, 32px)
     clamp(16px, 2vw, 32px);
+
+  background:
+    radial-gradient(
+      circle at bottom right,
+      rgba(196, 197, 197, 0.92) 0%,
+      rgba(233, 235, 238, 0.98) 55%,
+      #cfcfcf 100%
+    );
 
   border-radius: clamp(28px, 3vw, 48px);
 }
@@ -452,9 +474,6 @@ body {
 
   border: 2px solid rgba(16, 38, 82, 0.35);
   border-radius: inherit;
-
-  mask: url(#rink-heading-notch);
-  -webkit-mask: url(#rink-heading-notch);
 
   pointer-events: none;
 }
@@ -520,28 +539,32 @@ body {
 }
 
 .quick-links-heading {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  left: 0;
-
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 
-  transform: translateY(-50%);
+  margin: clamp(28px, 2.5vw, 42px) auto 0;
+}
 
-  pointer-events: none;
+.quick-links-heading::after {
+  content: "";
+
+  width: clamp(64px, 8vw, 120px);
+  height: 3px;
+  margin-top: clamp(8px, 1vw, 14px);
+
+  background: var(--gsc-red);
+  border-radius: 999px;
 }
 
 .quick-links-heading__title {
   margin: 0;
   padding: 0 12px;
 
-  color: var(--gsc-navy-dark);
+  color: #ffffff;
 
   font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(1.2rem, 1.5vw, 1.7rem);
+  font-size: clamp(1.8rem, 2.25vw, 2.55rem);
   font-weight: 400;
   line-height: 1;
 
@@ -573,6 +596,10 @@ body {
     padding-top: clamp(44px, 5vw, 68px);
     padding-bottom: clamp(28px, 3vw, 48px);
 
+    margin-top: clamp(20px, 2.2vw, 30px);
+  }
+
+  .quick-links-heading {
     margin-top: calc(clamp(28px, 2.5vw, 42px) + 25px);
   }
 
@@ -613,7 +640,7 @@ body {
   grid-column: span 2;
 
   min-width: 0;
-  min-height: 152px;
+  min-height: 180px;
 
   display: flex;
   flex-direction: row;
@@ -663,18 +690,8 @@ body {
 }
 
 @media (min-width: 2200px) {
-  .section-navigation {
-    grid-template-columns:
-      repeat(12, minmax(0, 1fr));
-  }
-
-  .nav-card:nth-child(5),
-  .nav-card:nth-child(6) {
-    grid-column: span 2;
-  }
-
   .rink-shape {
-    max-width: 2010px;
+    max-width: 1500px;
   }
 
   .story {
@@ -688,12 +705,6 @@ body {
 
   .story__copy {
     margin-top: 25px;
-  }
-
-  .nav-card:nth-child(4) .nav-card__title {
-    font-size: clamp(0.72rem, 0.85vw, 0.9rem);
-
-    white-space: nowrap;
   }
 }
 
@@ -741,11 +752,6 @@ body {
   height: 55%;
 }
 
-.nav-card__svg--board {
-  width: 66%;
-  height: 66%;
-}
-
 .nav-card__icon-image {
   display: block;
 
@@ -786,12 +792,26 @@ body {
   color: var(--gsc-navy-dark);
 
   font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(0.85rem, 1vw, 1.05rem);
+  font-size: clamp(1.15rem, 1.35vw, 1.45rem);
   font-weight: 400;
   line-height: 1.2;
 
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+@media (min-width: 1300px) and (max-width: 2199px) {
+  .nav-card:nth-child(1) .nav-card__title,
+  .nav-card:nth-child(2) .nav-card__title {
+    margin-left: -10px;
+
+    white-space: nowrap;
+  }
+
+  .nav-card:nth-child(1) .nav-card__description,
+  .nav-card:nth-child(2) .nav-card__description {
+    margin-left: -10px;
+  }
 }
 
 .nav-card__description {
@@ -801,11 +821,23 @@ body {
   color: var(--gsc-navy);
 
   font-family: "Montserrat", sans-serif;
-  font-size: clamp(0.68rem, 0.72vw, 0.82rem);
+  font-size: clamp(0.82rem, 0.88vw, 0.98rem);
   font-weight: 500;
   line-height: 1.4;
 
   white-space: normal;
+}
+
+@media (min-width: 1300px) and (max-width: 2199px) {
+  .nav-card__description {
+    width: calc(100% + 14px);
+
+    font-size: clamp(0.6rem, 0.65vw, 0.72rem);
+  }
+
+  .nav-card:nth-child(2) .nav-card__description {
+    width: calc(100% + 34px);
+  }
 }
 
 .nav-card__arrow {
@@ -822,6 +854,18 @@ body {
 
 .nav-card:hover .nav-card__arrow {
   transform: translateX(4px);
+}
+
+@media (min-width: 1300px) and (max-width: 2199px) {
+  .nav-card:nth-child(2) .nav-card__arrow {
+    margin-right: -10px;
+  }
+}
+
+@media (min-width: 1300px) and (max-width: 1700px) {
+  .nav-card__description {
+    font-size: clamp(0.78rem, 0.85vw, 0.92rem);
+  }
 }
 
 .nav-card__arrow-svg {
@@ -880,10 +924,6 @@ body {
       minmax(400px, 1.08fr);
 
     gap: clamp(30px, 3.4vw, 48px);
-  }
-
-  .story__accent-line {
-    height: 405px;
   }
 
   .nav-card {
@@ -973,11 +1013,6 @@ body {
     padding-top: clamp(34px, 4.5vw, 48px);
   }
 
-  .rink-shape::before {
-    mask: url(#rink-heading-notch-tablet);
-    -webkit-mask: url(#rink-heading-notch-tablet);
-  }
-
   .video-panel {
     margin-top: 15px;
   }
@@ -994,10 +1029,6 @@ body {
       11vw,
       60px
     );
-  }
-
-  .wings-banner::before {
-    background: #103e9c;
   }
 
   .page-shell {
@@ -1076,18 +1107,8 @@ body {
     border-radius: 32px;
   }
 
-  .rink-shape::before {
-    mask: url(#rink-heading-notch-mobile);
-    -webkit-mask: url(#rink-heading-notch-mobile);
-  }
-
   .quick-links-heading__title {
     font-size: 1.4rem;
-  }
-
-  .rink-shape__notch {
-    x: 0.25;
-    width: 0.5;
   }
 
   .section-navigation {
@@ -1155,10 +1176,6 @@ body {
     overflow-wrap: anywhere;
   }
 
-  .nav-card:nth-child(4) .nav-card__title {
-    font-size: clamp(1rem, 3.8vw, 1.16rem);
-  }
-
   .nav-card__arrow {
     grid-area: arrow;
 
@@ -1201,11 +1218,6 @@ body {
     border-radius: 26px;
   }
 
-  .rink-shape__notch {
-    x: 0.2;
-    width: 0.6;
-  }
-
   .nav-card {
     min-height: 116px;
 
@@ -1244,11 +1256,6 @@ body {
     padding: 30px 10px 10px;
 
     border-radius: 22px;
-  }
-
-  .rink-shape__notch {
-    x: 0.16;
-    width: 0.68;
   }
 
   .nav-card {

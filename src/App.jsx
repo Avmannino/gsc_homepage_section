@@ -32,12 +32,20 @@ const navigationLinks = [
     accent: "navy",
   },
   {
+    title: "Member Billing",
+    description:
+      "Manage your membership billing.",
+    href: "https://members.greenwichskatingclub.org/",
+    icon: "billing",
+    accent: "red",
+  },
+  {
     title: "Membership",
     description:
       "Learn about memberships.",
     href: `${SITE_BASE_URL}/membership`,
     icon: "membership",
-    accent: "red",
+    accent: "navy",
   },
   {
     title: "Programs",
@@ -45,14 +53,6 @@ const navigationLinks = [
       "See what’s happening on the ice.",
     href: `${SITE_BASE_URL}/programs`,
     icon: "programs",
-    accent: "navy",
-  },
-  {
-    title: "Board of Governors",
-    description:
-      "Meet the leaders guiding GSC.",
-    href: `${SITE_BASE_URL}/board-of-governors`,
-    icon: "board",
     accent: "red",
   },
   {
@@ -87,10 +87,11 @@ const iconArtwork = {
     </>
   ),
 
-  board: (
+  billing: (
     <>
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
-      <path d="m12 7 1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3-2.2-2.1 3-.4L12 7Z" />
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v10" />
+      <path d="M9.5 15c0 1.1 1.1 2 2.5 2s2.5-.9 2.5-2-1.1-1.7-2.5-2-2.5-.9-2.5-2 1.1-2 2.5-2 2.5.9 2.5 2" />
     </>
   ),
 };
@@ -102,14 +103,10 @@ const iconImages = {
   crossbar: crossbarIcon,
 };
 
-const svgSizeModifiers = {
-  board: "nav-card__svg--board",
-};
-
 function SectionIcon({ type }) {
   return (
     <svg
-      className={`nav-card__svg ${svgSizeModifiers[type] ?? ""}`}
+      className="nav-card__svg"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -358,6 +355,12 @@ function App() {
           </div>
         </div>
 
+        <div className="quick-links-heading">
+          <h2 className="quick-links-heading__title">
+            Around The Rink
+          </h2>
+        </div>
+
         <div className="rink-shape">
           <svg
             className="rink-shape__markings"
@@ -365,75 +368,6 @@ function App() {
             preserveAspectRatio="xMidYMid slice"
             aria-hidden="true"
           >
-            <defs>
-              <mask
-                id="rink-heading-notch"
-                maskContentUnits="objectBoundingBox"
-              >
-                <rect
-                  x="0"
-                  y="0"
-                  width="1"
-                  height="1"
-                  fill="white"
-                />
-                <rect
-                  className="rink-shape__notch"
-                  x="0.42"
-                  y="0"
-                  width="0.16"
-                  height="0.035"
-                  fill="black"
-                />
-              </mask>
-
-              {/*
-                The title takes up a much bigger share of the
-                (much narrower) rink shape at tablet and mobile
-                widths, so the notch needs to be proportionally
-                wider there or the border pokes through the text.
-              */}
-              <mask
-                id="rink-heading-notch-tablet"
-                maskContentUnits="objectBoundingBox"
-              >
-                <rect
-                  x="0"
-                  y="0"
-                  width="1"
-                  height="1"
-                  fill="white"
-                />
-                <rect
-                  x="0.325"
-                  y="0"
-                  width="0.35"
-                  height="0.035"
-                  fill="black"
-                />
-              </mask>
-
-              <mask
-                id="rink-heading-notch-mobile"
-                maskContentUnits="objectBoundingBox"
-              >
-                <rect
-                  x="0"
-                  y="0"
-                  width="1"
-                  height="1"
-                  fill="white"
-                />
-                <rect
-                  x="0.13"
-                  y="0"
-                  width="0.74"
-                  height="0.035"
-                  fill="black"
-                />
-              </mask>
-            </defs>
-
             <path
               d="M 12 40 A 5 5 0 0 1 12 50 Z"
               className="rink-shape__crease"
@@ -559,12 +493,6 @@ function App() {
               className="rink-shape__dot"
             />
           </svg>
-
-          <div className="quick-links-heading">
-            <h2 className="quick-links-heading__title">
-              Around The Rink
-            </h2>
-          </div>
 
           <nav
             className="section-navigation"
