@@ -104,6 +104,19 @@ const iconImages = {
   crossbar: crossbarIcon,
 };
 
+const socialLinks = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/thegreenwichskatingclub/",
+    icon: "facebook",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/thegreenwichskatingclub",
+    icon: "instagram",
+  },
+];
+
 function SectionIcon({ type }) {
   return (
     <svg
@@ -137,6 +150,55 @@ function ChevronIcon() {
     </svg>
   );
 }
+
+function FacebookIcon() {
+  return (
+    <svg
+      className="socials-banner__icon-svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H7.9V12h2.6V9.8c0-2.57 1.53-4 3.87-4 1.12 0 2.3.2 2.3.2v2.53h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.91h-2.4v7.04A10 10 0 0 0 22 12Z" />
+    </svg>
+  );
+}
+
+function InstagramIcon() {
+  return (
+    <svg
+      className="socials-banner__icon-svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect
+        x="3"
+        y="3"
+        width="18"
+        height="18"
+        rx="5"
+      />
+      <circle cx="12" cy="12" r="4.2" />
+      <circle
+        cx="17.4"
+        cy="6.6"
+        r="0.9"
+        fill="currentColor"
+        stroke="none"
+      />
+    </svg>
+  );
+}
+
+const socialIcons = {
+  facebook: FacebookIcon,
+  instagram: InstagramIcon,
+};
 
 function App() {
   const [logoFailed, setLogoFailed] = useState(false);
@@ -215,6 +277,28 @@ function App() {
         "orientationchange",
         updateBannerAngle,
       );
+    };
+  }, []);
+
+  useEffect(() => {
+    /*
+      Swiping back to this page on mobile Safari restores it from the
+      back-forward cache instead of reloading it. Since this app is
+      embedded via an iframe with target="_top" nav-card links, that
+      restored snapshot can leave click handlers unresponsive. Forcing
+      a real reload on a bfcache restore guarantees fresh JS state so
+      the cards work again.
+    */
+    const handlePageShow = (event) => {
+      if (event.persisted) {
+        window.location.reload();
+      }
+    };
+
+    window.addEventListener("pageshow", handlePageShow);
+
+    return () => {
+      window.removeEventListener("pageshow", handlePageShow);
     };
   }, []);
 
@@ -560,6 +644,41 @@ function App() {
           </nav>
         </div>
       </section>
+
+      <div className="socials-banner">
+        <div
+          className="socials-banner__shape"
+          aria-hidden="true"
+        />
+
+        <div className="socials-banner__content">
+          <span className="socials-banner__label">
+            Follow Us On
+          </span>
+
+          <nav
+            className="socials-banner__icons"
+            aria-label="Follow Greenwich Skating Club on social media"
+          >
+            {socialLinks.map((link) => {
+              const Icon = socialIcons[link.icon];
+
+              return (
+                <a
+                  className="socials-banner__icon"
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={link.label}
+                  aria-label={`Follow us on ${link.label}`}
+                >
+                  <Icon />
+                </a>
+              );
+            })}
+          </nav>
+        </div>
+      </div>
     </main>
   );
 }
