@@ -1200,7 +1200,7 @@ body {
 
   .nav-card:nth-child(1) .nav-card__title,
   .nav-card:nth-child(2) .nav-card__title {
-    font-size: clamp(0.82rem, 3.4vw, 1.02rem);
+    font-size: clamp(1rem, 4vw, 1.2rem);
 
     white-space: nowrap;
   }
