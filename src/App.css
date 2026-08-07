@@ -766,20 +766,25 @@ body {
   min-width: 0;
   min-height: 180px;
 
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "icon"
+    "content";
 
-  gap: clamp(10px, 1.1vw, 16px);
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+
+  row-gap: clamp(2px, 0.3vw, 4px);
 
   padding:
-    clamp(14px, 1.5vw, 20px)
-    clamp(16px, 1.7vw, 22px);
+    clamp(20px, 2.2vw, 28px)
+    clamp(44px, 4.2vw, 60px);
 
   color: var(--gsc-navy);
 
-  text-align: left;
+  text-align: center;
   text-decoration: none;
 
   background: var(--gsc-card-background);
@@ -840,10 +845,6 @@ body {
   .story__copy {
     margin-top: 25px;
   }
-
-  .nav-card__description {
-    font-size: clamp(1.1rem, 1.3vw, 1.55rem);
-  }
 }
 
 .nav-card:hover {
@@ -860,10 +861,10 @@ body {
 }
 
 .nav-card__icon {
-  flex: 0 0 auto;
+  grid-area: icon;
 
-  width: clamp(46px, 3.7vw, 67px);
-  height: clamp(46px, 3.7vw, 67px);
+  width: clamp(90px, 7.5vw, 132px);
+  height: clamp(90px, 7.5vw, 132px);
 
   display: grid;
   place-items: center;
@@ -886,8 +887,8 @@ body {
 }
 
 .nav-card__svg {
-  width: 55%;
-  height: 55%;
+  width: 74%;
+  height: 74%;
 }
 
 .nav-card__icon-image {
@@ -905,31 +906,39 @@ body {
 }
 
 .nav-card__divider {
-  flex: 0 0 auto;
-  display: block;
-
-  width: 1px;
-  height: clamp(48px, 4vw, 76px);
-
-  background: var(--gsc-divider);
+  display: none;
 }
 
 .nav-card__content {
-  flex: 1 1 auto;
+  grid-area: content;
+
   min-width: 0;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 
-  text-align: left;
+  text-align: center;
 }
 
 .nav-card__title {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.6em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  overflow-wrap: break-word;
+  word-break: break-word;
+
   color: var(--gsc-navy-dark);
 
-  font-family: "Bebas Neue", sans-serif;
+  font-family: "ArtBrush Medium", "Bebas Neue", sans-serif;
   font-size: clamp(1.3rem, 1.55vw, 1.65rem);
   font-weight: 400;
   line-height: 1.2;
@@ -938,64 +947,26 @@ body {
   text-transform: uppercase;
 }
 
-@media (min-width: 1300px) and (max-width: 2199px) {
-  .nav-card:nth-child(1) .nav-card__title,
-  .nav-card:nth-child(2) .nav-card__title {
-    margin-left: -10px;
-
-    white-space: nowrap;
-  }
-
-  .nav-card:nth-child(1) .nav-card__description,
-  .nav-card:nth-child(2) .nav-card__description {
-    margin-left: -10px;
-  }
-}
-
 .nav-card__description {
-  width: 100%;
-  margin-top: 6px;
-
-  color: var(--gsc-navy);
-
-  font-family: "Montserrat", sans-serif;
-  font-size: clamp(0.94rem, 1.01vw, 1.13rem);
-  font-weight: 500;
-  line-height: 1.4;
-
-  white-space: normal;
-}
-
-@media (min-width: 1300px) and (max-width: 2199px) {
-  .nav-card__description {
-    width: calc(100% + 14px);
-  }
-
-  .nav-card:nth-child(2) .nav-card__description {
-    width: calc(100% + 34px);
-  }
+  display: none;
 }
 
 .nav-card__arrow {
-  flex: 0 0 auto;
-
-  margin-left: auto;
+  position: absolute;
+  top: 50%;
+  right: clamp(16px, 2vw, 28px);
 
   width: clamp(23px, 1.95vw, 37px);
 
   color: var(--gsc-red);
 
+  transform: translateY(-50%);
+
   transition: transform 180ms ease;
 }
 
 .nav-card:hover .nav-card__arrow {
-  transform: translateX(4px);
-}
-
-@media (min-width: 1300px) and (max-width: 2199px) {
-  .nav-card:nth-child(2) .nav-card__arrow {
-    margin-right: -10px;
-  }
+  transform: translateY(-50%) translateX(4px);
 }
 
 .nav-card__arrow-svg {
@@ -1059,9 +1030,9 @@ body {
   .nav-card {
     min-height: 148px;
 
-    padding: 16px 20px;
+    padding: 16px 40px;
 
-    gap: 14px;
+    row-gap: 4px;
   }
 }
 
@@ -1110,9 +1081,9 @@ body {
 
     min-height: 152px;
 
-    padding: 18px;
+    padding: 18px 40px;
 
-    gap: 10px;
+    row-gap: 3px;
   }
 
   .nav-card:nth-child(5),
@@ -1127,10 +1098,6 @@ body {
 
   .nav-card__title {
     font-size: 1.15rem;
-  }
-
-  .nav-card__description {
-    font-size: 0.72rem;
   }
 }
 
@@ -1266,91 +1233,36 @@ body {
   .nav-card {
     min-height: 128px;
 
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "icon"
-      "content";
-
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-
-    row-gap: 10px;
+    row-gap: 3px;
 
     padding: 16px 40px;
-
-    text-align: center;
 
     border-radius: 14px;
   }
 
   .nav-card__icon {
-    grid-area: icon;
-
     width: 92px;
     height: 92px;
   }
 
-  /*
-    The two-column mobile card is too narrow to also show the
-    description, so it's dropped here; icon sits on its own row
-    with the title centered underneath. The arrow is taken out of
-    the grid flow (positioned absolutely) so it doesn't skew the
-    icon/title centering off to one side.
-  */
-  .nav-card__divider,
-  .nav-card__description {
-    display: none;
-  }
-
-  .nav-card__content {
-    grid-area: content;
-
-    width: 100%;
-
-    align-items: center;
-
-    text-align: center;
-  }
-
   .nav-card__title {
-    width: 100%;
-    min-height: 2.4em;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: clamp(1.15rem, 4.4vw, 1.34rem);
-    line-height: 1.2;
-
-    letter-spacing: 0.035em;
+    font-size: clamp(1.02rem, 3.9vw, 1.18rem);
 
     overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .nav-card:nth-child(1) .nav-card__title,
   .nav-card:nth-child(2) .nav-card__title {
-    font-size: clamp(1.1rem, 4.3vw, 1.3rem);
+    font-size: clamp(1rem, 4vw, 1.18rem);
 
     white-space: nowrap;
   }
 
   .nav-card__arrow {
-    position: absolute;
-    top: 50%;
     right: 12px;
 
-    margin-left: 0;
-
     width: 17px;
-
-    transform: translateY(-50%);
-  }
-
-  .nav-card:hover .nav-card__arrow {
-    transform: translateY(-50%) translateX(4px);
   }
 }
 
