@@ -935,6 +935,7 @@ body {
 
   overflow-wrap: break-word;
   word-break: break-word;
+  text-wrap: balance;
 
   color: var(--gsc-navy-dark);
 
@@ -1139,6 +1140,7 @@ body {
   }
 
   .socials-banner__content {
+    margin-top: 8px;
     left: clamp(12px, 3vw, 20px);
 
     gap: 10px;
@@ -1231,7 +1233,7 @@ body {
   }
 
   .nav-card {
-    min-height: 128px;
+    min-height: 200px;
 
     row-gap: 3px;
 
@@ -1246,7 +1248,7 @@ body {
   }
 
   .nav-card__title {
-    font-size: clamp(1.02rem, 3.9vw, 1.18rem);
+    font-size: clamp(0.88rem, 3.4vw, 1.02rem);
 
     overflow-wrap: anywhere;
     word-break: break-word;
@@ -1263,6 +1265,33 @@ body {
     right: 12px;
 
     width: 17px;
+  }
+
+  .rink-shape__blue-line,
+  .rink-shape__center-line {
+    opacity: 0.22;
+  }
+
+  .rink-shape__goal-line {
+    opacity: 0.16;
+  }
+
+  .rink-shape__center-circle,
+  .rink-shape__faceoff-circle {
+    opacity: 0.2;
+  }
+
+  .rink-shape__dot {
+    opacity: 0.22;
+  }
+
+  .rink-shape__center-logo {
+    opacity: 0.24;
+  }
+
+  .rink-shape__crease {
+    fill-opacity: 0.18;
+    opacity: 0.22;
   }
 }
 
@@ -1325,7 +1354,7 @@ body {
   }
 
   .nav-card__title {
-    font-size: clamp(0.96rem, 3.8vw, 1.1rem);
+    font-size: clamp(0.8rem, 3.2vw, 0.94rem);
     line-height: 1.15;
   }
 
