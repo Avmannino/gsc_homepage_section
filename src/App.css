@@ -800,14 +800,20 @@ body {
 */
 .nav-card:nth-child(5) {
   grid-column: 3 / span 2;
-
-  margin-right: clamp(8px, 1vw, 16px);
 }
 
 .nav-card:nth-child(6) {
   grid-column: 5 / span 2;
+}
 
-  margin-left: clamp(8px, 1vw, 16px);
+@media (min-width: 951px) {
+  .nav-card:nth-child(5) {
+    margin-right: clamp(8px, 1vw, 16px);
+  }
+
+  .nav-card:nth-child(6) {
+    margin-left: clamp(8px, 1vw, 16px);
+  }
 }
 
 @media (min-width: 1300px) and (max-width: 2199px) {
@@ -1310,6 +1316,11 @@ body {
 
   .nav-card__title {
     width: 100%;
+    min-height: 2.4em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     font-size: clamp(1.15rem, 4.4vw, 1.34rem);
     line-height: 1.2;
