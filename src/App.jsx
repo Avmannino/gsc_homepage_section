@@ -11,6 +11,7 @@ const MEDIA_BASE = `${import.meta.env.BASE_URL}media/`;
 const LOGO_SRC = `${MEDIA_BASE}taking-it-outside-logo.png`;
 const VIDEO_SRC = `${MEDIA_BASE}gsc-homepage-video.mp4`;
 const CENTER_ICE_LOGO_SRC = `${import.meta.env.BASE_URL}gsc-logo.png`;
+const PAGE_BACKGROUND_SRC = `${import.meta.env.BASE_URL}gsc-background.jpg`;
 
 /*
   These currently use the Wix Studio test-site URL.
@@ -218,7 +219,12 @@ function App() {
   }, []);
 
   return (
-    <main className="page-shell">
+    <main
+      className="page-shell"
+      style={{
+        "--page-bg-image": `url(${PAGE_BACKGROUND_SRC})`,
+      }}
+    >
       <div
         className="wings-banner"
         ref={bannerRef}

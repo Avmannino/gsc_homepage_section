@@ -36,6 +36,14 @@ body {
   --wings-banner-height: clamp(54px, 6vw, 108px);
 }
 
+@font-face {
+  font-family: "ArtBrush Medium";
+  src: url("./fonts/artBrushMed.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---------------------------------------------------------
    PAGE AND OUTER SECTION
 --------------------------------------------------------- */
@@ -53,6 +61,16 @@ body {
     clamp(20px, 3.4vw, 72px)
     clamp(20px, 3.4vw, 72px)
     clamp(18px, 2vw, 36px);
+
+  background-image:
+    linear-gradient(
+      rgba(31, 65, 155, 0.88),
+      rgba(31, 65, 155, 0.88)
+    ),
+    var(--page-bg-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* ---------------------------------------------------------
@@ -183,29 +201,20 @@ body {
     minmax(0, 1fr);
 
   gap: clamp(22px, 2.2vw, 44px);
+
+  border-radius: 24px;
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .story__accent-line {
-  position: relative;
-  bottom: -28px;
-
-  align-self: end;
+  align-self: center;
 
   width: 3px;
-  height: 300px;
+  height: 445px;
 
-  background: var(--gsc-red);
-}
-
-.story__accent-line::after {
-  content: "";
-
-  position: absolute;
-  bottom: 0;
-  left: 0;
-
-  width: clamp(220px, 28vw, 440px);
-  height: 3px;
+  border-radius: 999px;
 
   background: var(--gsc-red);
 }
@@ -224,7 +233,7 @@ body {
   width: 100%;
   min-height: clamp(64px, 6vw, 125px);
 
-  margin-bottom: clamp(2px, 0.4vw, 6px);
+  margin-bottom: clamp(-12px, -0.7vw, -6px);
 
   display: flex;
   align-items: center;
@@ -286,6 +295,8 @@ body {
 
 .story__copy {
   width: min(100%, 780px);
+
+  margin-top: 0;
 }
 
 .story__copy p {
@@ -446,7 +457,7 @@ body {
 .rink-shape {
   position: relative;
 
-  max-width: 1330px;
+  max-width: 1600px;
   margin: clamp(16px, 1.8vw, 24px) auto 0;
 
   padding:
@@ -463,6 +474,10 @@ body {
     );
 
   border-radius: clamp(28px, 3vw, 48px);
+
+  box-shadow:
+    0 20px 44px rgba(16, 38, 82, 0.18),
+    0 4px 12px rgba(16, 38, 82, 0.08);
 }
 
 .rink-shape::before {
@@ -563,7 +578,7 @@ body {
 
   color: #ffffff;
 
-  font-family: "Bebas Neue", sans-serif;
+  font-family: "ArtBrush Medium", "Bebas Neue", sans-serif;
   font-size: clamp(1.8rem, 2.25vw, 2.55rem);
   font-weight: 400;
   line-height: 1;
@@ -676,10 +691,14 @@ body {
 */
 .nav-card:nth-child(5) {
   grid-column: 3 / span 2;
+
+  margin-right: clamp(8px, 1vw, 16px);
 }
 
 .nav-card:nth-child(6) {
   grid-column: 5 / span 2;
+
+  margin-left: clamp(8px, 1vw, 16px);
 }
 
 @media (min-width: 1300px) and (max-width: 2199px) {
@@ -691,7 +710,7 @@ body {
 
 @media (min-width: 2200px) {
   .rink-shape {
-    max-width: 1500px;
+    max-width: 1850px;
   }
 
   .story {
@@ -705,6 +724,10 @@ body {
 
   .story__copy {
     margin-top: 25px;
+  }
+
+  .nav-card__description {
+    font-size: clamp(1.1rem, 1.3vw, 1.55rem);
   }
 }
 
@@ -724,8 +747,8 @@ body {
 .nav-card__icon {
   flex: 0 0 auto;
 
-  width: clamp(40px, 3.2vw, 58px);
-  height: clamp(40px, 3.2vw, 58px);
+  width: clamp(46px, 3.7vw, 67px);
+  height: clamp(46px, 3.7vw, 67px);
 
   display: grid;
   place-items: center;
@@ -792,7 +815,7 @@ body {
   color: var(--gsc-navy-dark);
 
   font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(1.15rem, 1.35vw, 1.45rem);
+  font-size: clamp(1.3rem, 1.55vw, 1.65rem);
   font-weight: 400;
   line-height: 1.2;
 
@@ -821,7 +844,7 @@ body {
   color: var(--gsc-navy);
 
   font-family: "Montserrat", sans-serif;
-  font-size: clamp(0.82rem, 0.88vw, 0.98rem);
+  font-size: clamp(0.94rem, 1.01vw, 1.13rem);
   font-weight: 500;
   line-height: 1.4;
 
@@ -831,8 +854,6 @@ body {
 @media (min-width: 1300px) and (max-width: 2199px) {
   .nav-card__description {
     width: calc(100% + 14px);
-
-    font-size: clamp(0.6rem, 0.65vw, 0.72rem);
   }
 
   .nav-card:nth-child(2) .nav-card__description {
@@ -845,7 +866,7 @@ body {
 
   margin-left: auto;
 
-  width: clamp(20px, 1.7vw, 32px);
+  width: clamp(23px, 1.95vw, 37px);
 
   color: var(--gsc-red);
 
@@ -859,12 +880,6 @@ body {
 @media (min-width: 1300px) and (max-width: 2199px) {
   .nav-card:nth-child(2) .nav-card__arrow {
     margin-right: -10px;
-  }
-}
-
-@media (min-width: 1300px) and (max-width: 1700px) {
-  .nav-card__description {
-    font-size: clamp(0.78rem, 0.85vw, 0.92rem);
   }
 }
 
@@ -1102,9 +1117,13 @@ body {
 
   .rink-shape {
     padding: 34px 16px 16px;
-    margin-top: 50px;
+    margin-top: 18px;
 
     border-radius: 32px;
+  }
+
+  .quick-links-heading {
+    margin-top: 60px;
   }
 
   .quick-links-heading__title {
@@ -1121,19 +1140,18 @@ body {
     min-height: 128px;
 
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr;
     grid-template-areas:
-      "icon icon"
-      "content arrow";
+      "icon"
+      "content";
 
     justify-content: center;
     justify-items: center;
     align-items: center;
 
     row-gap: 10px;
-    column-gap: 8px;
 
-    padding: 16px 12px;
+    padding: 16px 40px;
 
     text-align: center;
 
@@ -1143,14 +1161,16 @@ body {
   .nav-card__icon {
     grid-area: icon;
 
-    width: 78px;
-    height: 78px;
+    width: 92px;
+    height: 92px;
   }
 
   /*
     The two-column mobile card is too narrow to also show the
     description, so it's dropped here; icon sits on its own row
-    with the title and arrow grouped together underneath.
+    with the title centered underneath. The arrow is taken out of
+    the grid flow (positioned absolutely) so it doesn't skew the
+    icon/title centering off to one side.
   */
   .nav-card__divider,
   .nav-card__description {
@@ -1159,6 +1179,8 @@ body {
 
   .nav-card__content {
     grid-area: content;
+
+    width: 100%;
 
     align-items: center;
 
@@ -1176,12 +1198,27 @@ body {
     overflow-wrap: anywhere;
   }
 
+  .nav-card:nth-child(1) .nav-card__title,
+  .nav-card:nth-child(2) .nav-card__title {
+    font-size: clamp(0.82rem, 3.4vw, 1.02rem);
+
+    white-space: nowrap;
+  }
+
   .nav-card__arrow {
-    grid-area: arrow;
+    position: absolute;
+    top: 50%;
+    right: 12px;
 
     margin-left: 0;
 
     width: 17px;
+
+    transform: translateY(-50%);
+  }
+
+  .nav-card:hover .nav-card__arrow {
+    transform: translateY(-50%) translateX(4px);
   }
 }
 
