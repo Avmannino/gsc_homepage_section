@@ -208,6 +208,8 @@ const MEMBER_LOGIN_URL =
 const ADMISSIONS_EMAIL =
   "gscadmissions@greenwichskatingclub.org";
 
+const GSC_PHONE_NUMBER = "(203) 622-9583";
+
 
 const exploreGroups = [
   {
@@ -229,20 +231,6 @@ const exploreGroups = [
       {
         label: "GSC Alumni",
         href: `${SITE_BASE_URL}/gsc-alumni`,
-      },
-    ],
-  },
-  {
-    title: "Membership",
-    href: `${SITE_BASE_URL}/membership`,
-    links: [
-      {
-        label: "Prospective Members",
-        href: `${SITE_BASE_URL}/prospective-members`,
-      },
-      {
-        label: "Proposing a Candidate",
-        href: `${SITE_BASE_URL}/proposing-a-candidate`,
       },
     ],
   },
@@ -277,6 +265,20 @@ const exploreGroups = [
     ],
   },
   {
+    title: "Membership",
+    href: `${SITE_BASE_URL}/membership`,
+    links: [
+      {
+        label: "Prospective Members",
+        href: `${SITE_BASE_URL}/prospective-members`,
+      },
+      {
+        label: "Proposing a Candidate",
+        href: `${SITE_BASE_URL}/proposing-a-candidate`,
+      },
+    ],
+  },
+  {
     title: "Contact",
     href: `${SITE_BASE_URL}/contact`,
     links: [
@@ -299,6 +301,17 @@ function FooterArrowIcon() {
       aria-hidden="true"
     >
       <path d="m9 5 7 7-7 7" />
+    </svg>
+  );
+}
+
+function FooterPhoneIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1v3.6c0 .6-.4 1-1 1C10.6 21.1 2.9 13.4 2.9 3.7c0-.6.4-1 1-1h3.6c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8Z" />
     </svg>
   );
 }
@@ -375,11 +388,6 @@ function ExploreMenu() {
       className="footer-menu"
       aria-label="Explore Greenwich Skating Club"
     >
-      <div
-        className="footer-menu__accent-line"
-        aria-hidden="true"
-      />
-
       <div className="footer-menu__groups">
         {exploreGroups.map((group) => (
           <div
@@ -409,7 +417,8 @@ function ExploreMenu() {
                     href={link.href}
                     target="_top"
                   >
-                    {link.label}
+                    <span>{link.label}</span>
+                    <FooterArrowIcon />
                   </a>
                 </li>
               ))}
@@ -424,13 +433,17 @@ function ExploreMenu() {
 function ConnectPanel() {
   return (
     <section className="footer-connect">
+      <div className="footer-map">
+        <iframe
+          title="Greenwich Skating Club location"
+          src="https://www.google.com/maps?q=Greenwich+Skating+Club,+Cardinal+Road,+Greenwich,+CT&output=embed"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </div>
+
       <div className="footer-connect__info">
         <h2>Connect</h2>
-
-        <p>
-          Questions about joining Greenwich Skating
-          Club or visiting the rink?
-        </p>
 
         <div className="footer-connect__details">
           <a
@@ -441,6 +454,14 @@ function ConnectPanel() {
 
             <span>
               9 Cardinal Rd. Greenwich, CT 06830
+            </span>
+          </a>
+
+          <a href={`tel:${GSC_PHONE_NUMBER.replace(/[^\d+]/g, "")}`}>
+            <FooterPhoneIcon />
+
+            <span>
+              {GSC_PHONE_NUMBER}
             </span>
           </a>
 
@@ -477,15 +498,6 @@ function ConnectPanel() {
           </span>
         </a>
       </div>
-
-      <div className="footer-map">
-        <iframe
-          title="Greenwich Skating Club location"
-          src="https://www.google.com/maps?q=Greenwich+Skating+Club,+Cardinal+Road,+Greenwich,+CT&output=embed"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-      </div>
     </section>
   );
 }
@@ -517,13 +529,9 @@ function SiteFooter() {
         <ConnectPanel />
       </div>
 
-      <div className="site-footer__bottom">
-        <div className="footer-container site-footer__bottom-inner">
-          <p>
-            © {currentYear} Greenwich Skating Club
-          </p>
-        </div>
-      </div>
+      <p className="site-footer__copyright">
+        © {currentYear} Greenwich Skating Club
+      </p>
     </footer>
   );
 }
