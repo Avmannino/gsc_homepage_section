@@ -11,6 +11,7 @@ const MEDIA_BASE = `${import.meta.env.BASE_URL}media/`;
 const LOGO_SRC = `${MEDIA_BASE}taking-it-outside-logo.png`;
 const VIDEO_SRC = `${MEDIA_BASE}gsc-homepage-video.mp4`;
 const CENTER_ICE_LOGO_SRC = `${import.meta.env.BASE_URL}gsc-logo.png`;
+const MOBILE_LOGO_SRC = `${import.meta.env.BASE_URL}gsc-logo-mobile.png`;
 const PAGE_BACKGROUND_SRC = `${import.meta.env.BASE_URL}gsc-background.jpg`;
 
 /*
@@ -200,7 +201,335 @@ const socialIcons = {
   instagram: InstagramIcon,
 };
 
+
+const MEMBER_LOGIN_URL =
+  "https://www.greenwichskatingclub.org/login";
+
+const ADMISSIONS_EMAIL =
+  "gscadmissions@greenwichskatingclub.org";
+
+
+const exploreGroups = [
+  {
+    title: "About GSC",
+    href: `${SITE_BASE_URL}/about-gsc`,
+    links: [
+      {
+        label: "About The Club",
+        href: `${SITE_BASE_URL}/about-gsc`,
+      },
+      {
+        label: "Club History",
+        href: `${SITE_BASE_URL}/club-history`,
+      },
+      {
+        label: "Board of Governors",
+        href: `${SITE_BASE_URL}/board-of-governors`,
+      },
+      {
+        label: "GSC Alumni",
+        href: `${SITE_BASE_URL}/gsc-alumni`,
+      },
+    ],
+  },
+  {
+    title: "Membership",
+    href: `${SITE_BASE_URL}/membership`,
+    links: [
+      {
+        label: "Prospective Members",
+        href: `${SITE_BASE_URL}/prospective-members`,
+      },
+      {
+        label: "Proposing a Candidate",
+        href: `${SITE_BASE_URL}/proposing-a-candidate`,
+      },
+    ],
+  },
+  {
+    title: "Programs",
+    href: `${SITE_BASE_URL}/programs`,
+    links: [
+      {
+        label: "Learn to Skate",
+        href: `${SITE_BASE_URL}/learn-to-skate`,
+      },
+      {
+        label: "Mini Mites",
+        href: `${SITE_BASE_URL}/mini-mites`,
+      },
+      {
+        label: "Youth Travel Hockey",
+        href: `${SITE_BASE_URL}/youth-travel-hockey`,
+      },
+      {
+        label: "Stateline Girls",
+        href: `${SITE_BASE_URL}/stateline-girls`,
+      },
+      {
+        label: "Figure Skating",
+        href: `${SITE_BASE_URL}/figure-skating`,
+      },
+      {
+        label: "Adult Hockey",
+        href: `${SITE_BASE_URL}/adult-hockey`,
+      },
+    ],
+  },
+  {
+    title: "Contact",
+    href: `${SITE_BASE_URL}/contact`,
+    links: [
+      {
+        label: "Map & Directions",
+        href: `${SITE_BASE_URL}/directions`,
+      },
+      {
+        label: "Contact Form",
+        href: `${SITE_BASE_URL}/contact-form`,
+      },
+    ],
+  },
+];
+
+function FooterArrowIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path d="m9 5 7 7-7 7" />
+    </svg>
+  );
+}
+
+function FooterEmailIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <rect
+        x="3"
+        y="5"
+        width="18"
+        height="14"
+        rx="2"
+      />
+
+      <path d="m4 7 8 6 8-6" />
+    </svg>
+  );
+}
+
+function FooterPinIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
+
+      <circle
+        cx="12"
+        cy="10"
+        r="2.5"
+      />
+    </svg>
+  );
+}
+
+function FooterInstagramIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <rect
+        x="3"
+        y="3"
+        width="18"
+        height="18"
+        rx="5"
+      />
+
+      <circle
+        cx="12"
+        cy="12"
+        r="4"
+      />
+
+      <circle
+        className="icon-fill"
+        cx="17.5"
+        cy="6.5"
+        r="1"
+      />
+    </svg>
+  );
+}
+
+function ExploreMenu() {
+  return (
+    <nav
+      className="footer-menu"
+      aria-label="Explore Greenwich Skating Club"
+    >
+      <div
+        className="footer-menu__accent-line"
+        aria-hidden="true"
+      />
+
+      <div className="footer-menu__groups">
+        {exploreGroups.map((group) => (
+          <div
+            className="footer-menu__group"
+            key={group.title}
+          >
+            {group.title === "Programs" ? (
+              <a
+                className="footer-menu__group-title"
+                href={group.href}
+                target="_top"
+              >
+                <span>{group.title}</span>
+                <FooterArrowIcon />
+              </a>
+            ) : (
+              <div className="footer-menu__group-title">
+                <span>{group.title}</span>
+                <FooterArrowIcon />
+              </div>
+            )}
+
+            <ul>
+              {group.links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_top"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </nav>
+  );
+}
+
+function ConnectPanel() {
+  return (
+    <section className="footer-connect">
+      <div className="footer-connect__info">
+        <h2>Connect</h2>
+
+        <p>
+          Questions about joining Greenwich Skating
+          Club or visiting the rink?
+        </p>
+
+        <div className="footer-connect__details">
+          <a
+            href={`${SITE_BASE_URL}/directions`}
+            target="_top"
+          >
+            <FooterPinIcon />
+
+            <span>
+              9 Cardinal Rd. Greenwich, CT 06830
+            </span>
+          </a>
+
+          <a href={`mailto:${ADMISSIONS_EMAIL}`}>
+            <FooterEmailIcon />
+
+            <span>
+              {ADMISSIONS_EMAIL}
+            </span>
+          </a>
+        </div>
+
+        <a
+          className="member-button"
+          href={MEMBER_LOGIN_URL}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>Member Login</span>
+
+          <FooterArrowIcon />
+        </a>
+
+        <a
+          className="instagram-link"
+          href="https://www.instagram.com/thegreenwichskatingclub/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <FooterInstagramIcon />
+
+          <span>
+            Follow GSC on Instagram
+          </span>
+        </a>
+      </div>
+
+      <div className="footer-map">
+        <iframe
+          title="Greenwich Skating Club location"
+          src="https://www.google.com/maps?q=Greenwich+Skating+Club,+Cardinal+Road,+Greenwich,+CT&output=embed"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </div>
+    </section>
+  );
+}
+
+function SiteFooter() {
+  const currentYear =
+    new Date().getFullYear();
+
+  return (
+    <footer className="site-footer">
+      <img
+        className="site-footer__watermark"
+        src={MOBILE_LOGO_SRC}
+        alt=""
+        aria-hidden="true"
+      />
+
+      <div
+        className="site-footer__accent"
+        aria-hidden="true"
+      >
+        <span />
+        <span />
+      </div>
+
+      <div className="footer-container site-footer__main">
+        <ExploreMenu />
+
+        <ConnectPanel />
+      </div>
+
+      <div className="site-footer__bottom">
+        <div className="footer-container site-footer__bottom-inner">
+          <p>
+            © {currentYear} Greenwich Skating Club
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 function App() {
+
   const [logoFailed, setLogoFailed] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
 
@@ -303,8 +632,9 @@ function App() {
   }, []);
 
   return (
-    <main
-      className="page-shell"
+    <>
+      <main
+        className="page-shell"
       style={{
         "--page-bg-image": `url(${PAGE_BACKGROUND_SRC})`,
       }}
@@ -679,7 +1009,10 @@ function App() {
           </nav>
         </div>
       </div>
-    </main>
+      </main>
+
+      <SiteFooter />
+    </>
   );
 }
 
