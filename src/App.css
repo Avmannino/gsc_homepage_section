@@ -65,8 +65,8 @@ body {
 
   background-image:
     linear-gradient(
-      rgba(31, 65, 155, 0.88),
-      rgba(31, 65, 155, 0.88)
+      rgba(31, 65, 155, 0.6),
+      rgba(31, 65, 155, 0.6)
     ),
     var(--page-bg-image);
   background-position: center;
@@ -1486,7 +1486,7 @@ body {
   position: absolute;
   z-index: 0;
 
-  bottom: clamp(-180px, calc(-1vw - 85px), -85px);
+  bottom: clamp(-280px, calc(-185px - 1vw), -185px);
   left: clamp(-205px, -7vw, -95px);
 
   display: block;
@@ -1495,7 +1495,7 @@ body {
   height: auto;
   max-width: none;
 
-  opacity: 0.08;
+  opacity: 0.04;
 
   filter:
     saturate(0.58)
@@ -1926,7 +1926,7 @@ a.footer-menu__group-title:hover svg {
   }
 
   .site-footer__watermark {
-    top: -95px;
+    top: 5px;
     bottom: auto;
     left: -110px;
 
@@ -1985,7 +1985,7 @@ a.footer-menu__group-title:hover svg {
     left: -130px;
 
     width: 775px;
-    opacity: 0.05;
+    opacity: 0.025;
   }
 }
 
@@ -2094,7 +2094,7 @@ a.footer-menu__group-title:hover svg {
     transform: translate(-50%, calc(-50% - 275px));
 
     width: 951px;
-    opacity: 0.075;
+    opacity: 0.02;
   }
 }
 
