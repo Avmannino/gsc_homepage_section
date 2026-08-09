@@ -61,15 +61,7 @@ body {
     clamp(20px, 3.4vw, 72px)
     clamp(20px, 3.4vw, 72px);
 
-  background-image:
-    linear-gradient(
-      rgba(31, 65, 155, 0.72),
-      rgba(31, 65, 155, 0.72)
-    ),
-    var(--page-bg-image);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: #e8f4f8;
 }
 
 /* ---------------------------------------------------------
@@ -168,10 +160,10 @@ body {
 }
 
 /* ---------------------------------------------------------
-   TOP CONTENT
+   STORY / TEXT AREA
 --------------------------------------------------------- */
 
-.gsc-home-section__top {
+.story {
   display: grid;
 
   grid-template-columns:
@@ -186,34 +178,21 @@ body {
   align-items: start;
 
   gap: clamp(28px, 3vw, 56px);
-}
 
-/* ---------------------------------------------------------
-   STORY / TEXT AREA
---------------------------------------------------------- */
+  padding: clamp(28px, 3.5vw, 48px);
 
-.story {
-  --story-line-gap: clamp(22px, 2.2vw, 44px);
+  background: rgba(16, 38, 82, 0.05);
 
   border-radius: 24px;
 
+  box-shadow:
+    inset 0 10px 20px -6px rgba(16, 38, 82, 0.28),
+    inset 0 -4px 8px rgba(255, 255, 255, 0.8),
+    inset 8px 0 16px -12px rgba(16, 38, 82, 0.2),
+    inset -8px 0 16px -12px rgba(16, 38, 82, 0.2);
+
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-}
-
-.story__copy-row {
-  display: flex;
-  align-items: stretch;
-
-  gap: var(--story-line-gap);
-}
-
-.story__accent-line {
-  width: 3px;
-
-  border-radius: 999px;
-
-  background: var(--gsc-red);
 }
 
 .story__content {
@@ -222,8 +201,6 @@ body {
   justify-content: center;
 
   min-width: 0;
-
-  margin-top: clamp(-36px, -3vw, -18px);
 }
 
 .story__logo-container {
@@ -231,7 +208,6 @@ body {
   min-height: clamp(64px, 6vw, 125px);
 
   margin-bottom: clamp(-12px, -0.7vw, -6px);
-  padding-left: calc(3px + var(--story-line-gap));
 
   display: flex;
   align-items: center;
@@ -300,7 +276,7 @@ body {
 .story__copy p {
   margin: 0;
 
-  color: #ffffff;
+  color: var(--gsc-navy-dark);
 
   font-family: "Montserrat", sans-serif;
   font-size: clamp(0.96rem, 0.95vw, 1.22rem);
@@ -328,10 +304,43 @@ body {
    VIDEO AREA
 --------------------------------------------------------- */
 
-.video-panel {
+.video-frame {
   position: relative;
 
-  align-self: start;
+  width: 100%;
+  min-width: 0;
+}
+
+.video-frame__accent {
+  position: absolute;
+  z-index: 3;
+
+  width: 32%;
+  aspect-ratio: 1;
+
+  pointer-events: none;
+}
+
+.video-frame__accent--start {
+  top: -18px;
+  left: -18px;
+
+  border-top: 3px solid var(--gsc-red);
+  border-left: 3px solid var(--gsc-red);
+  border-radius: 6px 0 0 0;
+}
+
+.video-frame__accent--end {
+  right: -18px;
+  bottom: -18px;
+
+  border-right: 3px solid #2245a3;
+  border-bottom: 3px solid #2245a3;
+  border-radius: 0 0 6px 0;
+}
+
+.video-panel {
+  position: relative;
 
   width: 100%;
   min-width: 0;
@@ -346,8 +355,6 @@ body {
   min-height: 0;
   padding-top: 56.25%;
 
-  margin-top: -25px;
-
   overflow: hidden;
 
   contain: layout paint;
@@ -360,7 +367,7 @@ body {
       rgba(5, 18, 44, 0.98)
     );
 
-  border-radius: clamp(14px, 1.3vw, 24px);
+  border-radius: clamp(6px, 0.6vw, 12px);
 
   box-shadow:
     0 18px 38px rgba(14, 35, 72, 0.13),
@@ -446,17 +453,9 @@ body {
   font-size: 0.82rem;
 }
 
-@media (min-width: 1051px) {
-  .video-panel {
-    margin-top: -25px;
-  }
-}
-
 @media (min-width: 1051px) and (max-width: 1299px) {
   .video-panel {
     padding-top: 50%;
-
-    margin-top: -55px;
   }
 }
 
@@ -472,13 +471,7 @@ body {
   .video-panel {
     min-height: 0;
 
-    align-self: start;
-
     padding-top: 50%;
-
-    width: 94%;
-    margin: 0 auto;
-    margin-top: -25px;
   }
 }
 
@@ -539,7 +532,7 @@ body {
     );
   }
 
-  .gsc-home-section__top {
+  .story {
     grid-template-columns:
       minmax(0, 0.92fr)
       minmax(400px, 1.08fr);
@@ -561,7 +554,7 @@ body {
     );
   }
 
-  .gsc-home-section__top {
+  .story {
     grid-template-columns: 1fr;
 
     gap: 40px;
@@ -622,14 +615,6 @@ body {
     max-width: calc(100vw - 48px);
   }
 
-  .story__accent-line {
-    display: none;
-  }
-
-  .story__logo-container {
-    padding-left: 0;
-  }
-
   .story__content {
     padding: 0 8px;
   }
@@ -661,14 +646,14 @@ body {
     margin-top: 24px;
   }
 
-  .gsc-home-section__top {
+  .story {
     gap: 30px;
   }
 
   .video-panel {
     margin-top: 2px;
 
-    border-radius: 14px;
+    border-radius: 8px;
   }
 }
 

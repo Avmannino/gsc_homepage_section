@@ -6,7 +6,6 @@ const MEDIA_BASE = `${import.meta.env.BASE_URL}media/`;
 
 const LOGO_SRC = `${MEDIA_BASE}taking-it-outside-logo.png`;
 const VIDEO_SRC = `${MEDIA_BASE}gsc-homepage-video.mp4`;
-const PAGE_BACKGROUND_SRC = `${import.meta.env.BASE_URL}gsc-background.jpg`;
 
 function App() {
 
@@ -90,12 +89,7 @@ function App() {
   }, []);
 
   return (
-    <main
-      className="page-shell"
-      style={{
-        "--page-bg-image": `url(${PAGE_BACKGROUND_SRC})`,
-      }}
-    >
+    <main className="page-shell">
       <div
         className="wings-banner"
         ref={bannerRef}
@@ -114,123 +108,126 @@ function App() {
         className="gsc-home-section"
         aria-labelledby="gsc-home-section-title"
       >
-        <div className="gsc-home-section__top">
-          <div className="story">
-            <div className="story__content">
-              <h1
-                id="gsc-home-section-title"
-                className="screen-reader-only"
-              >
-                Taking it outside since 1954
-              </h1>
+        <div className="story">
+          <div className="story__content">
+            <h1
+              id="gsc-home-section-title"
+              className="screen-reader-only"
+            >
+              Taking it outside since 1954
+            </h1>
 
-              <div className="story__logo-container">
-                {!logoFailed ? (
-                  <img
-                    className="story__logo"
-                    src={LOGO_SRC}
-                    alt="Taking it outside since 1954"
-                    onError={() => setLogoFailed(true)}
-                  />
-                ) : (
-                  <div className="story__logo-placeholder">
-                    <span>
-                      Taking it outside since 1954!
-                    </span>
-
-                    <small>
-                      Add taking-it-outside-logo.png to
-                      public/media
-                    </small>
-                  </div>
-                )}
-              </div>
-
-              <div className="story__copy-row">
-                <div
-                  className="story__accent-line"
-                  aria-hidden="true"
+            <div className="story__logo-container">
+              {!logoFailed ? (
+                <img
+                  className="story__logo"
+                  src={LOGO_SRC}
+                  alt="Taking it outside since 1954"
+                  onError={() => setLogoFailed(true)}
                 />
+              ) : (
+                <div className="story__logo-placeholder">
+                  <span>
+                    Taking it outside since 1954!
+                  </span>
 
-                <div className="story__copy">
-                  <p>
-                    Founded in 1954, Greenwich Skating Club is a
-                    private, member-based club where families and
-                    friends can spend time together both on and off
-                    the ice. Over 250 families call GSC home,
-                    creating a close-knit community centered around
-                    skating, hockey, and shared traditions. With
-                    programs for children and adults, the skating
-                    club continues to bring people together and
-                    strengthen the sense of community that has
-                    defined GSC for generations.
-                  </p>
-
-                  <p>
-                    A wide range of programs and club activities
-                    gives members of all ages opportunities to enjoy
-                    the ice, stay active, and connect with one
-                    another throughout the year. It is this
-                    combination of skating, community, and time
-                    spent together that makes GSC such a special
-                    place for its members.
-                  </p>
+                  <small>
+                    Add taking-it-outside-logo.png to
+                    public/media
+                  </small>
                 </div>
-              </div>
+              )}
+            </div>
+
+            <div className="story__copy">
+              <p>
+                Founded in 1954, Greenwich Skating Club is a
+                private, member-based club where families and
+                friends can spend time together both on and off
+                the ice. Over 250 families call GSC home,
+                creating a close-knit community centered around
+                skating, hockey, and shared traditions. With
+                programs for children and adults, the skating
+                club continues to bring people together and
+                strengthen the sense of community that has
+                defined GSC for generations.
+              </p>
+
+              <p>
+                A wide range of programs and club activities
+                gives members of all ages opportunities to enjoy
+                the ice, stay active, and connect with one
+                another throughout the year. It is this
+                combination of skating, community, and time
+                spent together that makes GSC such a special
+                place for its members.
+              </p>
             </div>
           </div>
 
-          <div className="video-panel">
-            {!videoFailed ? (
-              <video
-                className="video-panel__video"
-                autoPlay
-                muted
-                loop
-                playsInline
-                controls
-                preload="metadata"
-                aria-label="Greenwich Skating Club video"
-                onError={() => setVideoFailed(true)}
-              >
-                <source
-                  src={VIDEO_SRC}
-                  type="video/mp4"
-                />
+          <div className="video-frame">
+            <div
+              className="video-frame__accent video-frame__accent--start"
+              aria-hidden="true"
+            />
 
-                Your browser does not support embedded video.
-              </video>
-            ) : (
-              <div className="video-panel__placeholder">
-                <div className="video-panel__placeholder-icon">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <rect
-                      x="3"
-                      y="5"
-                      width="18"
-                      height="14"
-                      rx="2"
-                    />
+            <div
+              className="video-frame__accent video-frame__accent--end"
+              aria-hidden="true"
+            />
 
-                    <path d="m10 9 5 3-5 3Z" />
-                  </svg>
+            <div className="video-panel">
+              {!videoFailed ? (
+                <video
+                  className="video-panel__video"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  preload="metadata"
+                  aria-label="Greenwich Skating Club video"
+                  onError={() => setVideoFailed(true)}
+                >
+                  <source
+                    src={VIDEO_SRC}
+                    type="video/mp4"
+                  />
+
+                  Your browser does not support embedded video.
+                </video>
+              ) : (
+                <div className="video-panel__placeholder">
+                  <div className="video-panel__placeholder-icon">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <rect
+                        x="3"
+                        y="5"
+                        width="18"
+                        height="14"
+                        rx="2"
+                      />
+
+                      <path d="m10 9 5 3-5 3Z" />
+                    </svg>
+                  </div>
+
+                  <strong>Add your GSC video</strong>
+
+                  <span>
+                    public/media/gsc-homepage-video.mp4
+                  </span>
                 </div>
-
-                <strong>Add your GSC video</strong>
-
-                <span>
-                  public/media/gsc-homepage-video.mp4
-                </span>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </section>
