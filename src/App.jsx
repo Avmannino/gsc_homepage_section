@@ -22,7 +22,7 @@ const PAGE_BACKGROUND_SRC = `${import.meta.env.BASE_URL}gsc-background.jpg`;
   changed individually in the navigationLinks array.
 */
 const SITE_BASE_URL =
-  "https://wingsarenact.wixstudio.com/gscnewsite";
+  "https://wingsarenact.wixstudio.com/gscnewsite"
 
 const navigationLinks = [
   {
@@ -155,7 +155,7 @@ function ChevronIcon() {
 function FacebookIcon() {
   return (
     <svg
-      className="socials-banner__icon-svg"
+      className="footer-socials__icon-svg"
       viewBox="0 0 24 24"
       fill="currentColor"
       aria-hidden="true"
@@ -168,7 +168,7 @@ function FacebookIcon() {
 function InstagramIcon() {
   return (
     <svg
-      className="socials-banner__icon-svg"
+      className="footer-socials__icon-svg"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -213,7 +213,7 @@ const GSC_PHONE_NUMBER = "(203) 622-9583";
 
 const exploreGroups = [
   {
-    title: "About GSC",
+    title: "About",
     href: `${SITE_BASE_URL}/about-gsc`,
     links: [
       {
@@ -231,6 +231,20 @@ const exploreGroups = [
       {
         label: "GSC Alumni",
         href: `${SITE_BASE_URL}/gsc-alumni`,
+      },
+    ],
+  },
+  {
+    title: "Membership",
+    href: `${SITE_BASE_URL}/membership`,
+    links: [
+      {
+        label: "Prospective Members",
+        href: `${SITE_BASE_URL}/prospective-members`,
+      },
+      {
+        label: "Proposing a Candidate",
+        href: `${SITE_BASE_URL}/proposing-a-candidate`,
       },
     ],
   },
@@ -261,20 +275,6 @@ const exploreGroups = [
       {
         label: "Adult Hockey",
         href: `${SITE_BASE_URL}/adult-hockey`,
-      },
-    ],
-  },
-  {
-    title: "Membership",
-    href: `${SITE_BASE_URL}/membership`,
-    links: [
-      {
-        label: "Prospective Members",
-        href: `${SITE_BASE_URL}/prospective-members`,
-      },
-      {
-        label: "Proposing a Candidate",
-        href: `${SITE_BASE_URL}/proposing-a-candidate`,
       },
     ],
   },
@@ -352,36 +352,6 @@ function FooterPinIcon() {
   );
 }
 
-function FooterInstagramIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <rect
-        x="3"
-        y="3"
-        width="18"
-        height="18"
-        rx="5"
-      />
-
-      <circle
-        cx="12"
-        cy="12"
-        r="4"
-      />
-
-      <circle
-        className="icon-fill"
-        cx="17.5"
-        cy="6.5"
-        r="1"
-      />
-    </svg>
-  );
-}
-
 function ExploreMenu() {
   return (
     <nav
@@ -433,46 +403,64 @@ function ExploreMenu() {
 function ConnectPanel() {
   return (
     <section className="footer-connect">
-      <div className="footer-map">
-        <iframe
-          title="Greenwich Skating Club location"
-          src="https://www.google.com/maps?q=Greenwich+Skating+Club,+Cardinal+Road,+Greenwich,+CT&output=embed"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-      </div>
-
       <div className="footer-connect__info">
-        <h2>Connect</h2>
+        <h2>Get In Touch</h2>
 
-        <div className="footer-connect__details">
+        <div className="footer-connect__cards">
           <a
+            className="footer-connect__card"
             href={`${SITE_BASE_URL}/directions`}
             target="_top"
           >
             <FooterPinIcon />
 
-            <span>
-              9 Cardinal Rd. Greenwich, CT 06830
+            <span className="footer-connect__card-text">
+              <span className="footer-connect__card-label">
+                Address
+              </span>
+
+              <span className="footer-connect__card-value">
+                9 Cardinal Rd.
+                <br />
+                Greenwich, CT 06830
+              </span>
             </span>
           </a>
 
-          <a href={`tel:${GSC_PHONE_NUMBER.replace(/[^\d+]/g, "")}`}>
+          <a
+            className="footer-connect__card"
+            href={`tel:${GSC_PHONE_NUMBER.replace(/[^\d+]/g, "")}`}
+          >
             <FooterPhoneIcon />
 
-            <span>
-              {GSC_PHONE_NUMBER}
-            </span>
-          </a>
+            <span className="footer-connect__card-text">
+              <span className="footer-connect__card-label">
+                Phone
+              </span>
 
-          <a href={`mailto:${ADMISSIONS_EMAIL}`}>
-            <FooterEmailIcon />
-
-            <span>
-              {ADMISSIONS_EMAIL}
+              <span className="footer-connect__card-value">
+                {GSC_PHONE_NUMBER}
+              </span>
             </span>
           </a>
         </div>
+
+        <a
+          className="footer-connect__card footer-connect__card--wide"
+          href={`mailto:${ADMISSIONS_EMAIL}`}
+        >
+          <FooterEmailIcon />
+
+          <span className="footer-connect__card-text">
+            <span className="footer-connect__card-label">
+              Email
+            </span>
+
+            <span className="footer-connect__card-value">
+              {ADMISSIONS_EMAIL}
+            </span>
+          </span>
+        </a>
 
         <a
           className="member-button"
@@ -485,18 +473,43 @@ function ConnectPanel() {
           <FooterArrowIcon />
         </a>
 
-        <a
-          className="instagram-link"
-          href="https://www.instagram.com/thegreenwichskatingclub/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <FooterInstagramIcon />
+        <div className="footer-socials">
+          <span
+            className="footer-socials__rule"
+            aria-hidden="true"
+          />
 
-          <span>
-            Follow GSC on Instagram
+          <span className="footer-socials__label">
+            Follow Us On
           </span>
-        </a>
+
+          <nav
+            className="footer-socials__icons"
+            aria-label="Follow Greenwich Skating Club on social media"
+          >
+            {socialLinks.map((link) => {
+              const Icon = socialIcons[link.icon];
+
+              return (
+                <a
+                  className="footer-socials__icon"
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={link.label}
+                  aria-label={`Follow us on ${link.label}`}
+                >
+                  <Icon />
+                </a>
+              );
+            })}
+          </nav>
+
+          <span
+            className="footer-socials__rule"
+            aria-hidden="true"
+          />
+        </div>
       </div>
     </section>
   );
@@ -523,10 +536,27 @@ function SiteFooter() {
         <span />
       </div>
 
-      <div className="footer-container site-footer__main">
-        <ExploreMenu />
+      <div className="footer-map">
+        <iframe
+          title="Greenwich Skating Club location"
+          src="https://www.google.com/maps?q=Greenwich+Skating+Club,+Cardinal+Road,+Greenwich,+CT&output=embed"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </div>
 
-        <ConnectPanel />
+      <div className="footer-container">
+        <img
+          className="footer-logo"
+          src={MOBILE_LOGO_SRC}
+          alt="Greenwich Skating Club"
+        />
+
+        <div className="site-footer__main">
+          <ExploreMenu />
+
+          <ConnectPanel />
+        </div>
       </div>
 
       <p className="site-footer__copyright">
@@ -982,41 +1012,6 @@ function App() {
           </nav>
         </div>
       </section>
-
-      <div className="socials-banner">
-        <div
-          className="socials-banner__shape"
-          aria-hidden="true"
-        />
-
-        <div className="socials-banner__content">
-          <span className="socials-banner__label">
-            Follow Us On
-          </span>
-
-          <nav
-            className="socials-banner__icons"
-            aria-label="Follow Greenwich Skating Club on social media"
-          >
-            {socialLinks.map((link) => {
-              const Icon = socialIcons[link.icon];
-
-              return (
-                <a
-                  className="socials-banner__icon"
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  key={link.label}
-                  aria-label={`Follow us on ${link.label}`}
-                >
-                  <Icon />
-                </a>
-              );
-            })}
-          </nav>
-        </div>
-      </div>
       </main>
 
       <SiteFooter />
