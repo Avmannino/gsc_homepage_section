@@ -697,11 +697,6 @@ function App() {
       >
         <div className="gsc-home-section__top">
           <div className="story">
-            <div
-              className="story__accent-line"
-              aria-hidden="true"
-            />
-
             <div className="story__content">
               <h1
                 id="gsc-home-section-title"
@@ -732,29 +727,36 @@ function App() {
                 )}
               </div>
 
-              <div className="story__copy">
-                <p>
-                  Founded in 1954, Greenwich Skating Club is a
-                  private, member-based club where families and
-                  friends can spend time together both on and off
-                  the ice. Over 250 families call GSC home,
-                  creating a close-knit community centered around
-                  skating, hockey, and shared traditions. With
-                  programs for children and adults, the skating
-                  club continues to bring people together and
-                  strengthen the sense of community that has
-                  defined GSC for generations.
-                </p>
+              <div className="story__copy-row">
+                <div
+                  className="story__accent-line"
+                  aria-hidden="true"
+                />
 
-                <p>
-                  A wide range of programs and club activities
-                  gives members of all ages opportunities to enjoy
-                  the ice, stay active, and connect with one
-                  another throughout the year. It is this
-                  combination of skating, community, and time
-                  spent together that makes GSC such a special
-                  place for its members.
-                </p>
+                <div className="story__copy">
+                  <p>
+                    Founded in 1954, Greenwich Skating Club is a
+                    private, member-based club where families and
+                    friends can spend time together both on and off
+                    the ice. Over 250 families call GSC home,
+                    creating a close-knit community centered around
+                    skating, hockey, and shared traditions. With
+                    programs for children and adults, the skating
+                    club continues to bring people together and
+                    strengthen the sense of community that has
+                    defined GSC for generations.
+                  </p>
+
+                  <p>
+                    A wide range of programs and club activities
+                    gives members of all ages opportunities to enjoy
+                    the ice, stay active, and connect with one
+                    another throughout the year. It is this
+                    combination of skating, community, and time
+                    spent together that makes GSC such a special
+                    place for its members.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
