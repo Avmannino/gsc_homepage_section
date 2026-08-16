@@ -598,22 +598,30 @@ body {
     padding: 12px 12px 48px;
   }
 
+  .story {
+    padding: 10px;
+  }
+
   .wings-banner__logo-positioner {
     right: clamp(12px, 3vw, 20px);
   }
 
   .wings-banner__logo {
     width: clamp(
-      132px,
-      52vw,
-      310px
+      140px,
+      55vw,
+      325px
     );
 
     max-width: calc(100vw - 48px);
+
+    transform:
+      rotate(-1deg)
+      translateY(-1px);
   }
 
   .story__content {
-    padding: 0 8px;
+    padding: 0;
   }
 
   .story__logo-container {
