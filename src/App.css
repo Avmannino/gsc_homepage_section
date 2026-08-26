@@ -30,6 +30,22 @@ body {
   --gsc-icon-background: #f1f3f7;
 
   --wings-banner-height: clamp(54px, 6vw, 108px);
+  --wings-animation-duration: 4.5s;
+
+  /*
+    ZAMBONI RESPONSIVE VARIABLES
+
+    These can change at breakpoints.
+
+    The animation itself NEVER changes the size.
+  */
+  --zamboni-width: clamp(
+    66px,
+    8.5vw,
+    160px
+  );
+
+  --zamboni-offset-y: -86%;
 }
 
 @font-face {
@@ -66,6 +82,7 @@ body {
 
   position: absolute;
   z-index: 5;
+
   top: 0;
   left: 0;
   right: 0;
@@ -116,12 +133,69 @@ body {
   );
 }
 
+/* ---------------------------------------------------------
+   TRIANGLE-CLIPPED LOGO AREA
+--------------------------------------------------------- */
+
+.wings-banner__animation-clip {
+  position: absolute;
+  z-index: 1;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%
+  );
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------
+   GO WINGS LOGO REVEAL
+--------------------------------------------------------- */
+
+.wings-banner__logo-reveal {
+  position: absolute;
+  z-index: 1;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  clip-path: polygon(
+    0 0,
+    43% 0,
+    43% 100%,
+    0 100%
+  );
+
+  animation:
+    wings-logo-reveal
+    var(--wings-animation-duration)
+    linear
+    1
+    forwards;
+
+  will-change: clip-path;
+}
+
 .wings-banner__logo-positioner {
   position: absolute;
   z-index: 1;
 
   top: 43%;
-  right: clamp(24px, 3vw, 64px);
+
+  right: calc(
+    clamp(110px, 13vw, 300px) - 90px
+  );
 
   display: flex;
   align-items: center;
@@ -134,8 +208,6 @@ body {
     rotate(var(--wings-banner-angle));
 
   transform-origin: center center;
-
-  will-change: transform;
 }
 
 .wings-banner__logo {
@@ -155,6 +227,181 @@ body {
   object-position: center;
 
   vertical-align: middle;
+}
+
+/* ---------------------------------------------------------
+   ZAMBONI MOVEMENT LAYER
+--------------------------------------------------------- */
+
+/*
+  THIS ELEMENT MOVES.
+
+  That is all it does.
+
+  No transform.
+  No width.
+  No height.
+  No scale.
+*/
+.wings-banner__zamboni-track {
+  position: absolute;
+  z-index: 3;
+
+  left: 50%;
+  top: 50%;
+
+  line-height: 0;
+
+  opacity: 1;
+
+  animation:
+    wings-zamboni-drive
+    var(--wings-animation-duration)
+    linear
+    1
+    forwards;
+
+  will-change:
+    left,
+    top;
+}
+
+/* ---------------------------------------------------------
+   ZAMBONI ORIENTATION LAYER
+--------------------------------------------------------- */
+
+/*
+  THIS ELEMENT HANDLES POSITIONING RELATIVE TO THE TRACK.
+
+  It never animates.
+
+  Mobile/tablet positioning differences are controlled through
+  --zamboni-offset-y rather than replacing this transform in
+  separate media queries.
+*/
+.wings-banner__zamboni-orienter {
+  display: block;
+
+  line-height: 0;
+
+  transform:
+    translate(
+      -50%,
+      var(--zamboni-offset-y)
+    )
+    rotate(var(--wings-banner-angle))
+    translateZ(0);
+
+  transform-origin: center center;
+
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ---------------------------------------------------------
+   ZAMBONI IMAGE
+--------------------------------------------------------- */
+
+/*
+  The image gets ONE width from --zamboni-width.
+
+  That variable changes responsively depending on screen size.
+
+  There is NO max-height constraint anymore.
+
+  This prevents the browser from trying to satisfy both a width
+  and height restriction while the Zamboni is moving.
+*/
+.wings-banner__zamboni {
+  display: block;
+
+  width: var(--zamboni-width) !important;
+  height: auto !important;
+
+  max-width: none !important;
+  max-height: none !important;
+
+  min-width: 0;
+  min-height: 0;
+
+  object-fit: contain;
+  object-position: center;
+
+  filter:
+    drop-shadow(
+      0 3px 3px rgba(74, 0, 8, 0.28)
+    );
+
+  animation: none !important;
+  transition: none !important;
+
+  transform: none !important;
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ---------------------------------------------------------
+   ZAMBONI DRIVE ANIMATION
+--------------------------------------------------------- */
+
+/*
+  THIS IS THE ONLY ZAMBONI ANIMATION.
+
+  It is used on desktop, laptop, tablet AND mobile.
+
+  The only two properties that change are LEFT and TOP.
+
+  Size cannot change because:
+  - width is not animated
+  - height is not animated
+  - scale is not animated
+  - transform is not animated
+  - max-height is not involved
+*/
+@keyframes wings-zamboni-drive {
+  0% {
+    left: 50%;
+    top: 50%;
+  }
+
+  100% {
+    left: 94%;
+    top: 94%;
+  }
+}
+
+/* ---------------------------------------------------------
+   GO WINGS REVEAL
+--------------------------------------------------------- */
+
+@keyframes wings-logo-reveal {
+  0% {
+    clip-path: polygon(
+      0 0,
+      43% 0,
+      43% 100%,
+      0 100%
+    );
+  }
+
+  94% {
+    clip-path: polygon(
+      0 0,
+      87% 0,
+      87% 100%,
+      0 100%
+    );
+  }
+
+  100% {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+  }
 }
 
 /* ---------------------------------------------------------
@@ -183,11 +430,6 @@ body {
     minmax(0, 0.9fr)
     minmax(480px, 1.1fr);
 
-  /*
-    Prevent either column from stretching the other column vertically.
-    This is especially important when iOS reports a new intrinsic video
-    size as the edited video switches between landscape and portrait clips.
-  */
   align-items: start;
 
   gap: clamp(28px, 3vw, 56px);
@@ -255,7 +497,12 @@ body {
     "Brush Script MT",
     cursive;
 
-  font-size: clamp(2.1rem, 3.4vw, 4.6rem);
+  font-size: clamp(
+    2.1rem,
+    3.4vw,
+    4.6rem
+  );
+
   font-style: italic;
   line-height: 1.05;
 }
@@ -292,18 +539,32 @@ body {
   color: var(--gsc-navy-dark);
 
   font-family: "Montserrat", sans-serif;
-  font-size: clamp(0.96rem, 0.95vw, 1.22rem);
+
+  font-size: clamp(
+    0.96rem,
+    0.95vw,
+    1.22rem
+  );
+
   font-weight: 500;
   line-height: 1.72;
 }
 
 .story__copy p + p {
-  margin-top: clamp(24px, 2.3vw, 42px);
+  margin-top: clamp(
+    24px,
+    2.3vw,
+    42px
+  );
 }
 
 @media (min-width: 1051px) {
   .story__copy p + p {
-    margin-top: clamp(16px, 1.6vw, 28px);
+    margin-top: clamp(
+      16px,
+      1.6vw,
+      28px
+    );
   }
 }
 
@@ -340,6 +601,7 @@ body {
 
   border-top: 3px solid var(--gsc-red);
   border-left: 3px solid var(--gsc-red);
+
   border-radius: 6px 0 0 0;
 }
 
@@ -349,6 +611,7 @@ body {
 
   border-right: 3px solid #2245a3;
   border-bottom: 3px solid #2245a3;
+
   border-radius: 0 0 6px 0;
 }
 
@@ -358,14 +621,9 @@ body {
   width: 100%;
   min-width: 0;
 
-  /*
-    Use a hard 16:9 ratio box instead of allowing the native video
-    element to participate in layout. The source video contains clips
-    with different orientations, and iOS Safari can otherwise resize the
-    grid item whenever the intrinsic video dimensions change.
-  */
   height: 0;
   min-height: 0;
+
   padding-top: 56.25%;
 
   overflow: hidden;
@@ -380,7 +638,11 @@ body {
       rgba(5, 18, 44, 0.98)
     );
 
-  border-radius: clamp(6px, 0.6vw, 12px);
+  border-radius: clamp(
+    6px,
+    0.6vw,
+    12px
+  );
 
   box-shadow:
     0 18px 38px rgba(14, 35, 72, 0.13),
@@ -389,14 +651,17 @@ body {
 
 .video-panel__video {
   position: absolute;
+
   inset: 0;
 
   display: block;
 
   width: 100%;
   height: 100%;
+
   min-width: 0;
   min-height: 0;
+
   max-width: 100%;
   max-height: 100%;
 
@@ -455,7 +720,11 @@ body {
 }
 
 .video-panel__placeholder strong {
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-size: clamp(
+    1rem,
+    1.5vw,
+    1.25rem
+  );
 }
 
 .video-panel__placeholder span {
@@ -491,6 +760,7 @@ body {
 @media (min-width: 1300px) and (max-width: 2199px) {
   .story__logo {
     width: min(100%, 639px);
+
     max-height: 122px;
   }
 }
@@ -498,6 +768,7 @@ body {
 @media (min-width: 2200px) {
   .story {
     position: relative;
+
     left: 45px;
   }
 
@@ -537,6 +808,20 @@ body {
 --------------------------------------------------------- */
 
 @media (max-width: 1280px) {
+  :root {
+    --zamboni-width: clamp(
+      62px,
+      9vw,
+      125px
+    );
+  }
+
+  .wings-banner__logo-positioner {
+    right: calc(
+      clamp(80px, 12vw, 190px) - 70px
+    );
+  }
+
   .wings-banner__logo {
     width: clamp(
       160px,
@@ -550,7 +835,11 @@ body {
       minmax(0, 0.92fr)
       minmax(400px, 1.08fr);
 
-    gap: clamp(30px, 3.4vw, 48px);
+    gap: clamp(
+      30px,
+      3.4vw,
+      48px
+    );
   }
 }
 
@@ -559,10 +848,24 @@ body {
 --------------------------------------------------------- */
 
 @media (max-width: 1050px) {
+  :root {
+    --zamboni-width: clamp(
+      58px,
+      10vw,
+      105px
+    );
+  }
+
   .gsc-home-section {
     margin-top: calc(
       var(--wings-banner-height) +
       clamp(8px, 1.2vw, 18px)
+    );
+  }
+
+  .wings-banner__logo-positioner {
+    right: calc(
+      clamp(65px, 11vw, 120px) - 55px
     );
   }
 
@@ -586,6 +889,7 @@ body {
 
   .story__logo {
     width: min(100%, 540px);
+
     max-height: 112px;
   }
 
@@ -615,6 +919,21 @@ body {
       11vw,
       60px
     );
+
+    --wings-animation-duration: 4s;
+
+    /*
+      Mobile Zamboni size.
+
+      Still constant for the whole animation.
+    */
+    --zamboni-width: clamp(
+      48px,
+      16vw,
+      78px
+    );
+
+    --zamboni-offset-y: -84%;
   }
 
   .gsc-home-section {
@@ -625,7 +944,10 @@ body {
   }
 
   .page-shell {
-    padding: 12px 12px 48px;
+    padding:
+      12px
+      12px
+      48px;
   }
 
   .story {
@@ -633,7 +955,9 @@ body {
   }
 
   .wings-banner__logo-positioner {
-    right: clamp(12px, 3vw, 20px);
+    right: calc(
+      clamp(45px, 12vw, 75px) - 45px
+    );
   }
 
   .wings-banner__logo {
@@ -643,7 +967,8 @@ body {
       325px
     );
 
-    max-width: calc(100vw - 48px);
+    max-width:
+      calc(100vw - 48px);
 
     transform:
       rotate(-1deg)
@@ -669,11 +994,16 @@ body {
   }
 
   .story__logo-placeholder span {
-    font-size: clamp(2rem, 10vw, 3rem);
+    font-size: clamp(
+      2rem,
+      10vw,
+      3rem
+    );
   }
 
   .story__copy p {
     font-size: 0.94rem;
+
     line-height: 1.65;
   }
 
@@ -707,8 +1037,16 @@ body {
 --------------------------------------------------------- */
 
 @media (max-width: 390px) {
+  :root {
+    --zamboni-width: clamp(
+      44px,
+      17vw,
+      66px
+    );
+  }
+
   .wings-banner__logo-positioner {
-    right: 10px;
+    right: -8px;
   }
 
   .wings-banner__logo {
@@ -718,6 +1056,31 @@ body {
       200px
     );
 
-    max-width: calc(100vw - 34px);
+    max-width:
+      calc(100vw - 34px);
+  }
+}
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .wings-banner__logo-reveal {
+    animation: none;
+
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+  }
+
+  .wings-banner__zamboni-track {
+    animation: none;
+
+    left: 94%;
+    top: 94%;
   }
 }

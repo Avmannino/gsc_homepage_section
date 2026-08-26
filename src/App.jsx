@@ -7,19 +7,15 @@ const MEDIA_BASE = `${import.meta.env.BASE_URL}media/`;
 const LOGO_SRC = `${MEDIA_BASE}taking-it-outside-logo.png`;
 const VIDEO_SRC = `${MEDIA_BASE}gsc-homepage-video.mp4`;
 
-function App() {
+const ZAMBONI_SRC = `${import.meta.env.BASE_URL}zamboni.png`;
 
+function App() {
   const [logoFailed, setLogoFailed] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
+  const [zamboniFailed, setZamboniFailed] = useState(false);
 
   const bannerRef = useRef(null);
 
-  /*
-    Calculates only the angle of the diagonal banner.
-
-    Logo sizing is handled entirely by responsive CSS so the
-    JavaScript cannot unexpectedly shrink the logo.
-  */
   useEffect(() => {
     const bannerElement = bannerRef.current;
 
@@ -95,13 +91,30 @@ function App() {
         ref={bannerRef}
         aria-hidden="true"
       >
-        <div className="wings-banner__logo-positioner">
-          <img
-            className="wings-banner__logo"
-            src={gowingsLogo}
-            alt=""
-          />
+        <div className="wings-banner__animation-clip">
+          <div className="wings-banner__logo-reveal">
+            <div className="wings-banner__logo-positioner">
+              <img
+                className="wings-banner__logo"
+                src={gowingsLogo}
+                alt=""
+              />
+            </div>
+          </div>
         </div>
+
+        {!zamboniFailed && (
+          <div className="wings-banner__zamboni-track">
+            <div className="wings-banner__zamboni-orienter">
+              <img
+                className="wings-banner__zamboni"
+                src={ZAMBONI_SRC}
+                alt=""
+                onError={() => setZamboniFailed(true)}
+              />
+            </div>
+          </div>
+        )}
       </div>
 
       <section
