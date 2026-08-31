@@ -194,7 +194,7 @@ body {
   top: 43%;
 
   right: calc(
-    clamp(110px, 13vw, 300px) - 90px
+    clamp(110px, 13vw, 300px) - 170px
   );
 
   display: flex;
@@ -818,7 +818,7 @@ body {
 
   .wings-banner__logo-positioner {
     right: calc(
-      clamp(80px, 12vw, 190px) - 70px
+      clamp(80px, 12vw, 190px) - 150px
     );
   }
 
